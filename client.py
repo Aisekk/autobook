@@ -1,6 +1,5 @@
 from ctypes import *
 
-#lib = cdll.LoadLibrary("/backend.dll")
 lib = cdll.LoadLibrary("./sources/backend/backend.dll")
 lib.Add.argtypes = [c_longlong, c_longlong]
 print("backend.Add(12,99) = %d" % lib.Add(12,99))
