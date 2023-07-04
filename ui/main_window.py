@@ -1,7 +1,7 @@
 from ast import Add
 from client import lib
 
-from PyQt6.QtCore import QSize #, Qt
+from PyQt6.QtCore import QSize, QObject #, Qt
 from PyQt6.QtWidgets import QMainWindow, QPushButton, QWidget
 from PyQt6.QtGui import QAction, QIcon
 from ui.settings_dialog import SettingsDialog
@@ -10,7 +10,7 @@ class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
         #super().__init__()
-        self.setWindowTitle("Autobook")
+        self.setWindowTitle(QObject().tr("Autobook"))
         self.setWindowIcon(QIcon("./sources/icons/cabriolet.png"))
         self.createMenus()
         self.settingsDialog = SettingsDialog(self)
@@ -19,9 +19,9 @@ class MainWindow(QMainWindow):
         #self.setCentralWidget(button)
 
     def createMenus(self):
-        menu = self.menuBar().addMenu("Menu")
+        projectMenu = self.menuBar().addMenu("Project")
         self.settingsAction = QAction("Settings", self)
-        menu.addAction(self.settingsAction)
+        projectMenu.addAction(self.settingsAction)
 
     def connectObjects(self):
         self.settingsAction.triggered.connect(lambda: self.settingsDialog.show()) 
