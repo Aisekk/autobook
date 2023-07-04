@@ -13,15 +13,15 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Autobook")
         self.setWindowIcon(QIcon("./sources/icons/cabriolet.png"))
         self.createMenus()
-        self.settings_dialog = SettingsDialog(self)
+        self.settingsDialog = SettingsDialog(self)
         self.connectObjects()
         #button = QPushButton("From Go: backend.Add(10,99) = %d" % lib.Add(10,99))
         #self.setCentralWidget(button)
 
     def createMenus(self):
         menu = self.menuBar().addMenu("Menu")
-        self.settings_action = QAction("Settings", self)
-        menu.addAction(self.settings_action)
+        self.settingsAction = QAction("Settings", self)
+        menu.addAction(self.settingsAction)
 
     def connectObjects(self):
-        self.settings_action.triggered.connect(lambda: self.settings_dialog.show()) 
+        self.settingsAction.triggered.connect(lambda: self.settingsDialog.show()) 
