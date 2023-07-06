@@ -1,5 +1,3 @@
-from asyncio.windows_events import NULL
-import select
 from PyQt6.QtCore import QSize
 from PyQt6.QtWidgets import (
     QDialog,
@@ -17,10 +15,10 @@ from PyQt6.QtWidgets import (
 )
 
 
-class SettingsDialog(QDialog):
+class ProjectSettingsDialog(QDialog):
     def __init__(self, parent=None):
         QDialog.__init__(self, parent)
-        self.setWindowTitle(self.tr("Settings"))
+        self.setWindowTitle(self.tr("Project settings"))
         self.resize(500, 400)
         self.settingsWidget = self.createSettingsWidget(self)
         self.buttonsWidget = self.createButtons(self)
@@ -117,7 +115,6 @@ class SettingsDialog(QDialog):
 
     def fillCarBox(self, carGroupBox):
         self.carComboBox = QComboBox()
-        # self.carComboBox.addItem("Solaris")
         self.carComboBox.addItems(
             [
                 "Hyundai Solaris 1.6 2012",

@@ -35,19 +35,35 @@
 			<translation>Удалить</translation>
 		</message>
 		<message>
+			<source>Garage</source>
+			<translation>Гараж</translation>
+		</message>
+		<message>
+			<source>Open</source>
+			<translation>Открыть</translation>
+		</message>
+		<message>
+			<source>Settings</source>
+			<translation>Настройки</translation>
+		</message>
+		<message>
 			<source>Project</source>
 			<translation>Проект</translation>
 		</message>
 		<message>
-			<source>Settings</source>
-			<translation>Настройки</translation>
+			<source>Info</source>
+			<translation>Информация</translation>
+		</message>
+		<message>
+			<source>About program</source>
+			<translation>О программе</translation>
 		</message>
 	</context>
 	<context>
-		<name>SettingsDialog</name>
+		<name>ProjectSettingsDialog</name>
 		<message>
-			<source>Settings</source>
-			<translation>Настройки</translation>
+			<source>Project settings</source>
+			<translation>Настройки проекта</translation>
 		</message>
 		<message>
 			<source>Car</source>
