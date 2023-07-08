@@ -1,0 +1,31 @@
+
+Как сделать .exe файл из программы на Python
+Пример программы
+
+Create environment (Your Python executable might be called python3):
+python -m venv env
+
+Activate the environment (Linux and macOS):
+source env/bin/activate
+
+Activate the environment (Windows):
+env\Scripts\activate.bat
+
+# Открыть командную строку windows 
+# Установить pyinstaller 
+
+pip install pyinstaller 
+
+# Затем перейти в папку с Вашим файлом .py в командной строке (при помощи команды cd) 
+# Запустить команду pyinstaller не забудьте указать имя вашего скрипта 
+
+pyinstaller --onefile <your_script_name>.py
+pyinstaller --onefile main.py 
+
+# Всё - у вас в папке появится папка src и там будет .exe файл. 
+
+Есть пара нюансов с PyQt. Нужно еще в path указать директорию к pyqt. Попробуйте создать exe командой:
+pyinstaller --noupx --onefile --noconsole --path PATH_TO_VENV\Lib\site-packages\PyQt5\Qt\bin script.py
+pyinstaller --noupx --onefile --noconsole --path PATH_TO_VENV\Lib\site-packages\PySide6\Qt\bin main.py
+
+

@@ -1,6 +1,7 @@
 /__pycache__
-/build
-/dist
 *.pyc
-*spec
-
+*.spec
+/.vs
+*.pyproj
+*.sln
+/sources/build
