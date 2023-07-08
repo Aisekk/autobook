@@ -7,7 +7,7 @@ from ui.main_window import MainWindow
 app = QApplication(sys.argv)
 
 translator = QTranslator()
-if translator.load("./sources/translations/autobook_ru_RU.qm"):
+if translator.load("./translations/autobook_ru_RU.qm"):
     QCoreApplication.installTranslator(translator)
 qDebug("123")
 

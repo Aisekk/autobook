@@ -5,3 +5,4 @@
 *.pyproj
 *.sln
 /sources/build
+/env
