@@ -1,9 +1,17 @@
 from ast import Add
 from client import lib
 
-from PySide6.QtCore import QSize  # , Qt
-from PySide6.QtWidgets import QMainWindow, QPushButton, QMessageBox
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import (
+    QMainWindow,
+    QWidget,
+    QHBoxLayout,
+    QPushButton,
+    QMessageBox,
+)
 from PySide6.QtGui import QAction, QIcon
+
+from ui.control_widget import ControlWidget
 from ui.car_addition_dialog import CarAdditionDialog
 from ui.project_settings_dialog import ProjectSettingsDialog
 from data_store.autobook_data_store import AutobookDataStore
@@ -13,12 +21,20 @@ class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
         # super().__init__()
-        # ui
         self.setWindowTitle(self.tr("Autobook"))
         self.setWindowIcon(QIcon("./sources/icons/cabriolet.png"))
         self.createMenus()
         self.carAdditionDialog = CarAdditionDialog(self)
         self.projectSettingsDialog = ProjectSettingsDialog(self)
+        self.controlWidget = ControlWidget()
+
+        centralWidget = QWidget()
+        hbxMainLayout = QHBoxLayout()
+        hbxMainLayout.addWidget(self.controlWidget, 10)
+        hbxMainLayout.addWidget(QWidget(), 40)
+        centralWidget.setLayout(hbxMainLayout)
+        self.setCentralWidget(centralWidget)
+        
         self.connectObjects()
         # self.autobookDataStore = AutobookDataStore()
         # button = QPushButton("From Go: backend.Add(10,99) = %d" % lib.Add(10,99))

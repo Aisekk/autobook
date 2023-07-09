@@ -1,4 +1,4 @@
-from PySide6.QtCore import QSize, qDebug
+from PySide6.QtCore import qDebug
 from PySide6.QtWidgets import (
     QDialog,
     QWidget,

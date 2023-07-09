@@ -60,6 +60,33 @@
 		</message>
 	</context>
 	<context>
+		<name>ControlWidget</name>
+		<message>
+			<source>Car</source>
+			<translation>Автомобиль</translation>
+		</message>
+		<message>
+			<source>Basics</source>
+			<translation>Основное</translation>
+		</message>
+		<message>
+			<source>Details</source>
+			<translation>Подробности</translation>
+		</message>
+		<message>
+			<source>Numbers and codes</source>
+			<translation>Номера и коды</translation>
+		</message>
+		<message>
+			<source>Owner/Driver</source>
+			<translation>Владелец/Водитель</translation>
+		</message>
+		<message>
+			<source>Find</source>
+			<translation>Найти</translation>
+		</message>
+	</context>
+	<context>
 		<name>CarAdditionDialog</name>
 		<message>
 			<source>Add new car</source>
@@ -99,7 +126,7 @@
 		</message>
 		<message>
 			<source>Owner/Driver</source>
-			<translation>Владелец/водитель</translation>
+			<translation>Владелец/Водитель</translation>
 		</message>
 	</context>
 	<context>
