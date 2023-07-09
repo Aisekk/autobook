@@ -23,8 +23,8 @@
 			<translation>Автомобиль</translation>
 		</message>
 		<message>
-			<source>Create</source>
-			<translation>Создать</translation>
+			<source>Add</source>
+			<translation>Добавить</translation>
 		</message>
 		<message>
 			<source>Edit</source>
@@ -60,6 +60,49 @@
 		</message>
 	</context>
 	<context>
+		<name>CarAdditionDialog</name>
+		<message>
+			<source>Add new car</source>
+			<translation>Добавить новый автомобиль</translation>
+		</message>
+		<message>
+			<source>Add</source>
+			<translation>Добавить</translation>
+		</message>
+		<message>
+			<source>Cancel</source>
+			<translation>Отмена</translation>
+		</message>
+		<message>
+			<source>Brand*</source>
+			<translation>Марка*</translation>
+		</message>
+		<message>
+			<source>Model*</source>
+			<translation>Модель*</translation>
+		</message>
+		<message>
+			<source>Engine capacity, l</source>
+			<translation>Объем двигателя, л</translation>
+		</message>
+		<message>
+			<source>Manufacture year</source>
+			<translation>Год выпуска</translation>
+		</message>
+		<message>
+			<source>Body type</source>
+			<translation>Тип кузова</translation>
+		</message>
+		<message>
+			<source>State number</source>
+			<translation>Госномер</translation>
+		</message>
+		<message>
+			<source>Owner/Driver</source>
+			<translation>Владелец/водитель</translation>
+		</message>
+	</context>
+	<context>
 		<name>ProjectSettingsDialog</name>
 		<message>
 			<source>Project settings</source>
@@ -74,8 +117,16 @@
 			<translation>База данных</translation>
 		</message>
 		<message>
-			<source>Options</source>
-			<translation>Опции</translation>
+			<source>Garage</source>
+			<translation>Гараж</translation>
+		</message>
+		<message>
+			<source>Limits</source>
+			<translation>Ограничения</translation>
+		</message>
+		<message>
+			<source>Maximum car count</source>
+			<translation>Максимальное количество автомобилей</translation>
 		</message>
 		<message>
 			<source>Data load</source>

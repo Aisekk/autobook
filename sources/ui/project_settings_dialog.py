@@ -1,4 +1,5 @@
-from PySide6.QtCore import QSize
+import sys
+from PySide6.QtCore import QSize, qDebug
 from PySide6.QtWidgets import (
     QDialog,
     QWidget,
@@ -10,7 +11,9 @@ from PySide6.QtWidgets import (
     QStackedWidget,
     QPushButton,
     QComboBox,
+    QSpinBox,
     QRadioButton,
+    QLabel,
     QSizePolicy,
 )
 
@@ -19,7 +22,7 @@ class ProjectSettingsDialog(QDialog):
     def __init__(self, parent=None):
         QDialog.__init__(self, parent)
         self.setWindowTitle(self.tr("Project settings"))
-        self.resize(500, 400)
+        self.resize(550, 400)
         self.settingsWidget = self.createSettingsWidget(self)
         self.buttonsWidget = self.createButtons(self)
         vbxMainLayout = QVBoxLayout()
@@ -34,25 +37,25 @@ class ProjectSettingsDialog(QDialog):
         self.settingsGroup = QListWidget(settingsWidget)
         self.settingsGroup.setAutoScroll(False)
         self.carItem = QListWidgetItem(self.tr("Car"), self.settingsGroup)
+        self.garageItem = QListWidgetItem(self.tr("Garage"), self.settingsGroup)
         self.databaseItem = QListWidgetItem(self.tr("Database"), self.settingsGroup)
-        self.optionsItem = QListWidgetItem(self.tr("Options"), self.settingsGroup)
 
         self.settingsGroup.addItem(self.carItem)
+        self.settingsGroup.addItem(self.garageItem)
         self.settingsGroup.addItem(self.databaseItem)
-        self.settingsGroup.addItem(self.optionsItem)
 
         self.setSizeHintOfItems(QSize(200, 50))
 
         self.carWidget = self.createCarWidget(settingsWidget)
+        self.garageWidget = self.createGarageWidget(settingsWidget)
         self.databaseWidget = self.createDatabaseWidget(settingsWidget)
-        self.optionsWidget = self.createOptionsWidget(settingsWidget)
         self.emptyWidget = QWidget(settingsWidget)
 
         self.stackedWidget = QStackedWidget(self)
         self.stackedWidget.addWidget(self.emptyWidget)
         self.stackedWidget.addWidget(self.carWidget)
+        self.stackedWidget.addWidget(self.garageWidget)
         self.stackedWidget.addWidget(self.databaseWidget)
-        self.stackedWidget.addWidget(self.optionsWidget)
         self.stackedWidget.setCurrentWidget(self.emptyWidget)
 
         # sp_retain = self.database_widget.sizePolicy()
@@ -89,14 +92,15 @@ class ProjectSettingsDialog(QDialog):
         databaseWidget.setLayout(vbxLayout)
         return databaseWidget
 
-    def createOptionsWidget(self, parent=None):
-        optionsWidget = QWidget(parent)
-        optionsGroupBox = QGroupBox(self.tr("Options"), optionsWidget)
+    def createGarageWidget(self, parent=None):
+        garageWidget = QWidget(parent)
+        garageLimitsGroupBox = QGroupBox(self.tr("Limits"), garageWidget)
+        self.fillGarageLimitsBox(garageLimitsGroupBox)
         vbxLayout = QVBoxLayout()
-        vbxLayout.addWidget(optionsGroupBox, 5)
+        vbxLayout.addWidget(garageLimitsGroupBox, 10)
         vbxLayout.addStretch(10)
-        optionsWidget.setLayout(vbxLayout)
-        return optionsWidget
+        garageWidget.setLayout(vbxLayout)
+        return garageWidget
 
     def createButtons(self, parent=None):
         buttonsWidget = QWidget(parent)
@@ -127,6 +131,18 @@ class ProjectSettingsDialog(QDialog):
         vbox.addStretch(1)
         carGroupBox.setLayout(vbox)
 
+    def fillGarageLimitsBox(self, garageLimitsGroupBox):
+        maxCarCountLabel = QLabel(self.tr("Maximum car count") + ":")
+        self.maxCarCountSpinBox = QSpinBox()
+        #qDebug("max(int) = " + str(int(10e9)))
+        self.maxCarCountSpinBox.setRange(1, int(10e8))
+        self.maxCarCountSpinBox.setValue(5)
+        vbox = QVBoxLayout()
+        vbox.addWidget(maxCarCountLabel, 1)
+        vbox.addWidget(self.maxCarCountSpinBox, 1)
+        vbox.addStretch(10)
+        garageLimitsGroupBox.setLayout(vbox)
+
     def fillDataLoadBox(self, dataloadGroupBox):
         self.radioPython = QRadioButton("Python")
         self.radioGo = QRadioButton("Go")
@@ -155,10 +171,10 @@ class ProjectSettingsDialog(QDialog):
         match item:
             case self.carItem:
                 self.stackedWidget.setCurrentWidget(self.carWidget)
+            case self.garageItem:
+                self.stackedWidget.setCurrentWidget(self.garageWidget)
             case self.databaseItem:
-                self.stackedWidget.setCurrentWidget(self.databaseWidget)
-            case self.optionsItem:
-                self.stackedWidget.setCurrentWidget(self.optionsWidget)
+                self.stackedWidget.setCurrentWidget(self.databaseWidget)            
             case _:
                 self.stackedWidget.setCurrentWidget(self.emptyWidget)
 
