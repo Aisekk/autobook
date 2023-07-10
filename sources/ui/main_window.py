@@ -11,10 +11,10 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import QAction, QIcon
 
-from ui.control_widget import ControlWidget
-from ui.car_addition_dialog import CarAdditionDialog
-from ui.project_settings_dialog import ProjectSettingsDialog
-from data_store.autobook_data_store import AutobookDataStore
+import ui.control_widget
+import ui.car_addition_dialog
+import ui.project_settings_dialog
+import data_store.autobook_data_store as storage
 
 
 class MainWindow(QMainWindow):
@@ -23,48 +23,51 @@ class MainWindow(QMainWindow):
         # super().__init__()
         self.setWindowTitle(self.tr("Autobook"))
         self.setWindowIcon(QIcon("./sources/icons/cabriolet.png"))
-        self.createMenus()
-        self.carAdditionDialog = CarAdditionDialog(self)
-        self.projectSettingsDialog = ProjectSettingsDialog(self)
-        self.controlWidget = ControlWidget()
+        self.__createMenus()
+        self.__carAdditionDialog = ui.car_addition_dialog.CarAdditionDialog(self)
+        self.__projectSettingsDialog = ui.project_settings_dialog.ProjectSettingsDialog(
+            self
+        )
+        self.__controlWidget = ui.control_widget.ControlWidget()
 
-        centralWidget = QWidget()
+        centralWidget = QWidget(self)
         hbxMainLayout = QHBoxLayout()
-        hbxMainLayout.addWidget(self.controlWidget, 10)
+        hbxMainLayout.addWidget(self.__controlWidget, 10)
         hbxMainLayout.addWidget(QWidget(), 40)
         centralWidget.setLayout(hbxMainLayout)
         self.setCentralWidget(centralWidget)
-        
-        self.connectObjects()
-        # self.autobookDataStore = AutobookDataStore()
+
+        self.__connectObjects()
         # button = QPushButton("From Go: backend.Add(10,99) = %d" % lib.Add(10,99))
         # self.setCentralWidget(button)
 
-    def createMenus(self):
+    def __createMenus(self):
         carMenu = self.menuBar().addMenu(self.tr("Car"))
-        self.addCarAction = QAction(self.tr("Add") + "...", self)
-        self.editCarAction = QAction(self.tr("Edit"), self)
-        self.removeCarAction = QAction(self.tr("Remove"), self)
-        carMenu.addAction(self.addCarAction)
-        carMenu.addAction(self.editCarAction)
-        carMenu.addAction(self.removeCarAction)
+        self.__addCarAction = QAction(self.tr("Add") + "...", self)
+        self.__editCarAction = QAction(self.tr("Edit"), self)
+        self.__removeCarAction = QAction(self.tr("Remove"), self)
+        carMenu.addAction(self.__addCarAction)
+        carMenu.addAction(self.__editCarAction)
+        carMenu.addAction(self.__removeCarAction)
 
         garageMenu = self.menuBar().addMenu(self.tr("Garage"))
-        self.openGarageAction = QAction(self.tr("Open"), self)
-        garageMenu.addAction(self.openGarageAction)
+        self.__openGarageAction = QAction(self.tr("Open"), self)
+        garageMenu.addAction(self.__openGarageAction)
 
         settingsMenu = self.menuBar().addMenu(self.tr("Settings"))
-        self.projectAction = QAction(self.tr("Project"), self)
-        settingsMenu.addAction(self.projectAction)
+        self.__projectAction = QAction(self.tr("Project"), self)
+        settingsMenu.addAction(self.__projectAction)
 
         infoMenu = self.menuBar().addMenu(self.tr("Info"))
-        self.aboutProgramAction = QAction(self.tr("About program"), self)
-        infoMenu.addAction(self.aboutProgramAction)
+        self.__aboutProgramAction = QAction(self.tr("About program"), self)
+        infoMenu.addAction(self.__aboutProgramAction)
 
-    def connectObjects(self):
-        self.addCarAction.triggered.connect(lambda: self.carAdditionDialog.show())
-        self.projectAction.triggered.connect(lambda: self.projectSettingsDialog.show())
-        self.aboutProgramAction.triggered.connect(
+    def __connectObjects(self):
+        self.__addCarAction.triggered.connect(lambda: self.__carAdditionDialog.show())
+        self.__projectAction.triggered.connect(
+            lambda: self.__projectSettingsDialog.show()
+        )
+        self.__aboutProgramAction.triggered.connect(
             lambda: QMessageBox.information(
                 self,
                 self.tr("About program"),

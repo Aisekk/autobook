@@ -23,68 +23,68 @@ class ProjectSettingsDialog(QDialog):
         QDialog.__init__(self, parent)
         self.setWindowTitle(self.tr("Project settings"))
         self.resize(550, 400)
-        self.settingsWidget = self.createSettingsWidget(self)
-        self.buttonsWidget = self.createButtons(self)
+        self.__settingsWidget = self.__createSettingsWidget(self)
+        self.__buttonsWidget = self.__createButtons(self)
         vbxMainLayout = QVBoxLayout()
-        vbxMainLayout.addWidget(self.settingsWidget, 10)
-        vbxMainLayout.addWidget(self.buttonsWidget, 1)
+        vbxMainLayout.addWidget(self.__settingsWidget, 10)
+        vbxMainLayout.addWidget(self.__buttonsWidget, 1)
         self.setLayout(vbxMainLayout)
-        self.connectObjects()
+        self.__connectObjects()
 
-    def createSettingsWidget(self, parent=None):
+    def __createSettingsWidget(self, parent=None):
         settingsWidget = QWidget(parent)
 
-        self.settingsGroup = QListWidget(settingsWidget)
-        self.settingsGroup.setAutoScroll(False)
-        self.carItem = QListWidgetItem(self.tr("Car"), self.settingsGroup)
-        self.garageItem = QListWidgetItem(self.tr("Garage"), self.settingsGroup)
-        self.databaseItem = QListWidgetItem(self.tr("Database"), self.settingsGroup)
+        self.__settingsGroup = QListWidget(settingsWidget)
+        self.__settingsGroup.setAutoScroll(False)
+        self.__carItem = QListWidgetItem(self.tr("Car"), self.__settingsGroup)
+        self.__garageItem = QListWidgetItem(self.tr("Garage"), self.__settingsGroup)
+        self.__databaseItem = QListWidgetItem(self.tr("Database"), self.__settingsGroup)
 
-        self.settingsGroup.addItem(self.carItem)
-        self.settingsGroup.addItem(self.garageItem)
-        self.settingsGroup.addItem(self.databaseItem)
+        self.__settingsGroup.addItem(self.__carItem)
+        self.__settingsGroup.addItem(self.__garageItem)
+        self.__settingsGroup.addItem(self.__databaseItem)
 
         self.setSizeHintOfItems(QSize(200, 50))
 
-        self.carWidget = self.createCarWidget(settingsWidget)
-        self.garageWidget = self.createGarageWidget(settingsWidget)
-        self.databaseWidget = self.createDatabaseWidget(settingsWidget)
-        self.emptyWidget = QWidget(settingsWidget)
+        self.__carWidget = self.__createCarWidget(settingsWidget)
+        self.__garageWidget = self.__createGarageWidget(settingsWidget)
+        self.__databaseWidget = self.__createDatabaseWidget(settingsWidget)
+        self.__emptyWidget = QWidget(settingsWidget)
 
-        self.stackedWidget = QStackedWidget(self)
-        self.stackedWidget.addWidget(self.emptyWidget)
-        self.stackedWidget.addWidget(self.carWidget)
-        self.stackedWidget.addWidget(self.garageWidget)
-        self.stackedWidget.addWidget(self.databaseWidget)
-        self.stackedWidget.setCurrentWidget(self.emptyWidget)
+        self.__stackedWidget = QStackedWidget(self)
+        self.__stackedWidget.addWidget(self.__emptyWidget)
+        self.__stackedWidget.addWidget(self.__carWidget)
+        self.__stackedWidget.addWidget(self.__garageWidget)
+        self.__stackedWidget.addWidget(self.__databaseWidget)
+        self.__stackedWidget.setCurrentWidget(self.__emptyWidget)
 
         # sp_retain = self.database_widget.sizePolicy()
         # sp_retain.setRetainSizeWhenHidden(True)
         # self.database_widget.setSizePolicy(sp_retain)
 
         hbxLayout = QHBoxLayout()
-        hbxLayout.addWidget(self.settingsGroup, 1)
-        hbxLayout.addWidget(self.stackedWidget, 1)
+        hbxLayout.addWidget(self.__settingsGroup, 1)
+        hbxLayout.addWidget(self.__stackedWidget, 1)
 
         settingsWidget.setLayout(hbxLayout)
         return settingsWidget
 
-    def createCarWidget(self, parent=None):
+    def __createCarWidget(self, parent=None):
         carWidget = QWidget(parent)
         carGroupBox = QGroupBox(self.tr("Car"), carWidget)
-        self.fillCarBox(carGroupBox)
+        self.__fillCarBox(carGroupBox)
         vbxLayout = QVBoxLayout()
         vbxLayout.addWidget(carGroupBox, 1)
         vbxLayout.addStretch(10)
         carWidget.setLayout(vbxLayout)
         return carWidget
 
-    def createDatabaseWidget(self, parent=None):
+    def __createDatabaseWidget(self, parent=None):
         databaseWidget = QWidget(parent)
         dataloadGroupBox = QGroupBox(self.tr("Data load"), databaseWidget)
         threadsGroupBox = QGroupBox(self.tr("Multithreading"), databaseWidget)
-        self.fillDataLoadBox(dataloadGroupBox)
-        self.fillThreadsBox(threadsGroupBox)
+        self.__fillDataLoadBox(dataloadGroupBox)
+        self.__fillThreadsBox(threadsGroupBox)
         vbxLayout = QVBoxLayout()
         vbxLayout.addWidget(dataloadGroupBox, 1)
         vbxLayout.addWidget(threadsGroupBox, 1)
@@ -92,34 +92,34 @@ class ProjectSettingsDialog(QDialog):
         databaseWidget.setLayout(vbxLayout)
         return databaseWidget
 
-    def createGarageWidget(self, parent=None):
+    def __createGarageWidget(self, parent=None):
         garageWidget = QWidget(parent)
         garageLimitsGroupBox = QGroupBox(self.tr("Limits"), garageWidget)
-        self.fillGarageLimitsBox(garageLimitsGroupBox)
+        self.__fillGarageLimitsBox(garageLimitsGroupBox)
         vbxLayout = QVBoxLayout()
         vbxLayout.addWidget(garageLimitsGroupBox, 10)
         vbxLayout.addStretch(10)
         garageWidget.setLayout(vbxLayout)
         return garageWidget
 
-    def createButtons(self, parent=None):
+    def __createButtons(self, parent=None):
         buttonsWidget = QWidget(parent)
-        self.applyButton = QPushButton(self.tr("Apply"), buttonsWidget)
-        self.cancelButton = QPushButton(self.tr("Cancel"), buttonsWidget)
+        self.__applyButton = QPushButton(self.tr("Apply"), buttonsWidget)
+        self.__cancelButton = QPushButton(self.tr("Cancel"), buttonsWidget)
         hbxLayout = QHBoxLayout()
         hbxLayout.addStretch(10)
-        hbxLayout.addWidget(self.applyButton, 1)
-        hbxLayout.addWidget(self.cancelButton, 1)
+        hbxLayout.addWidget(self.__applyButton, 1)
+        hbxLayout.addWidget(self.__cancelButton, 1)
         buttonsWidget.setLayout(hbxLayout)
         return buttonsWidget
 
     def setSizeHintOfItems(self, sizeHint):
-        for row in range(self.settingsGroup.count()):
-            self.settingsGroup.item(row).setSizeHint(sizeHint)
+        for row in range(self.__settingsGroup.count()):
+            self.__settingsGroup.item(row).setSizeHint(sizeHint)
 
-    def fillCarBox(self, carGroupBox):
-        self.carComboBox = QComboBox()
-        self.carComboBox.addItems(
+    def __fillCarBox(self, carGroupBox):
+        self.__carComboBox = QComboBox()
+        self.__carComboBox.addItems(
             [
                 "Hyundai Solaris 1.6 2012",
                 "VAZ Lada Vesta 1.5 2020",
@@ -127,56 +127,55 @@ class ProjectSettingsDialog(QDialog):
             ]
         )
         vbox = QVBoxLayout()
-        vbox.addWidget(self.carComboBox, 1)
+        vbox.addWidget(self.__carComboBox, 1)
         vbox.addStretch(1)
         carGroupBox.setLayout(vbox)
 
-    def fillGarageLimitsBox(self, garageLimitsGroupBox):
+    def __fillGarageLimitsBox(self, garageLimitsGroupBox):
         maxCarCountLabel = QLabel(self.tr("Maximum car count") + ":")
-        self.maxCarCountSpinBox = QSpinBox()
-        #qDebug("max(int) = " + str(int(10e9)))
-        self.maxCarCountSpinBox.setRange(1, int(10e8))
-        self.maxCarCountSpinBox.setValue(5)
+        self.__maxCarCountSpinBox = QSpinBox()
+        self.__maxCarCountSpinBox.setRange(1, int(10e8))
+        self.__maxCarCountSpinBox.setValue(5)
         vbox = QVBoxLayout()
         vbox.addWidget(maxCarCountLabel, 1)
-        vbox.addWidget(self.maxCarCountSpinBox, 1)
+        vbox.addWidget(self.__maxCarCountSpinBox, 1)
         vbox.addStretch(10)
         garageLimitsGroupBox.setLayout(vbox)
 
-    def fillDataLoadBox(self, dataloadGroupBox):
-        self.radioPython = QRadioButton("Python")
-        self.radioGo = QRadioButton("Go")
-        self.radioCpp = QRadioButton("C++")
-        self.radioJava = QRadioButton("Java")
+    def __fillDataLoadBox(self, dataloadGroupBox):
+        self.__radioPython = QRadioButton("Python")
+        self.__radioGo = QRadioButton("Go")
+        self.__radioCpp = QRadioButton("C++")
+        self.__radioJava = QRadioButton("Java")
         vbox = QVBoxLayout()
-        vbox.addWidget(self.radioPython, 1)
-        vbox.addWidget(self.radioGo, 1)
-        vbox.addWidget(self.radioCpp, 1)
-        vbox.addWidget(self.radioJava, 1)
+        vbox.addWidget(self.__radioPython, 1)
+        vbox.addWidget(self.__radioGo, 1)
+        vbox.addWidget(self.__radioCpp, 1)
+        vbox.addWidget(self.__radioJava, 1)
         vbox.addStretch(1)
-        self.radioPython.setChecked(True)
+        self.__radioPython.setChecked(True)
         dataloadGroupBox.setLayout(vbox)
 
-    def fillThreadsBox(self, threads_group_box):
-        self.multithreadingOn = QRadioButton(self.tr("On"))
-        self.multithreadingOff = QRadioButton(self.tr("Off"))
+    def __fillThreadsBox(self, threads_group_box):
+        self.__multithreadingOn = QRadioButton(self.tr("On"))
+        self.__multithreadingOff = QRadioButton(self.tr("Off"))
         vbox = QVBoxLayout()
-        vbox.addWidget(self.multithreadingOn, 1)
-        vbox.addWidget(self.multithreadingOff, 1)
+        vbox.addWidget(self.__multithreadingOn, 1)
+        vbox.addWidget(self.__multithreadingOff, 1)
         vbox.addStretch(1)
-        self.multithreadingOff.setChecked(True)
+        self.__multithreadingOff.setChecked(True)
         threads_group_box.setLayout(vbox)
 
-    def onItemClicked(self, item):
+    def __onItemClicked(self, item):
         match item:
-            case self.carItem:
-                self.stackedWidget.setCurrentWidget(self.carWidget)
-            case self.garageItem:
-                self.stackedWidget.setCurrentWidget(self.garageWidget)
-            case self.databaseItem:
-                self.stackedWidget.setCurrentWidget(self.databaseWidget)            
+            case self.__carItem:
+                self.__stackedWidget.setCurrentWidget(self.__carWidget)
+            case self.__garageItem:
+                self.__stackedWidget.setCurrentWidget(self.__garageWidget)
+            case self.__databaseItem:
+                self.__stackedWidget.setCurrentWidget(self.__databaseWidget)
             case _:
-                self.stackedWidget.setCurrentWidget(self.emptyWidget)
+                self.__stackedWidget.setCurrentWidget(self.__emptyWidget)
 
-    def connectObjects(self):
-        self.settingsGroup.itemClicked.connect(self.onItemClicked)
+    def __connectObjects(self):
+        self.__settingsGroup.itemClicked.connect(self.__onItemClicked)

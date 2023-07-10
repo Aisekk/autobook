@@ -17,55 +17,55 @@ class CarAdditionDialog(QDialog):
         self.setWindowTitle(self.tr("Add new car"))
         self.setMaximumSize(800, 250)
         self.resize(400, 250)
-        self.carDataWidget = self.createCarDataWidget(self)
-        self.buttonsWidget = self.createButtons(self)
+        self.__carDataWidget = self.__createCarDataWidget(self)
+        self.__buttonsWidget = self.__createButtons(self)
         vbxMainLayout = QVBoxLayout()
-        vbxMainLayout.addWidget(self.carDataWidget, 10)
+        vbxMainLayout.addWidget(self.__carDataWidget, 10)
         vbxMainLayout.addStretch(10)
-        vbxMainLayout.addWidget(self.buttonsWidget, 1)
+        vbxMainLayout.addWidget(self.__buttonsWidget, 1)
         self.setLayout(vbxMainLayout)
 
-    def createCarDataWidget(self, parent=None):
+    def __createCarDataWidget(self, parent=None):
         carDataWidget = QWidget(parent)
-        self.grdLayout = QGridLayout()
-        self.rowSpan = 1
-        self.colSpan = 1
+        self.__grdLayout = QGridLayout()
+        self.__rowSpan = 1
+        self.__colSpan = 1
 
         row = 0
-        self.leBrand = self.addDataElemWidget("Brand*", row)
+        self.__leBrand = self.__addDataElemWidget("Brand*", row)
         row += 1
-        self.leModel = self.addDataElemWidget("Model*", row)
+        self.__leModel = self.__addDataElemWidget("Model*", row)
         row += 1
-        self.leEngineCapacity = self.addDataElemWidget("Engine capacity, l", row)
+        self.__leEngineCapacity = self.__addDataElemWidget("Engine capacity, l", row)
         row += 1
-        self.leManufactureYear = self.addDataElemWidget("Manufacture year", row)
+        self.__leManufactureYear = self.__addDataElemWidget("Manufacture year", row)
         row += 1
-        self.leBodyType = self.addDataElemWidget("Body type", row)
+        self.__leBodyType = self.__addDataElemWidget("Body type", row)
         row += 1
-        self.leStateNumber = self.addDataElemWidget("State number", row)
+        self.__leStateNumber = self.__addDataElemWidget("State number", row)
         row += 1
-        self.leOwnerDriver = self.addDataElemWidget("Owner/Driver", row)
+        self.__leOwnerDriver = self.__addDataElemWidget("Owner/Driver", row)
 
-        carDataWidget.setLayout(self.grdLayout)
+        carDataWidget.setLayout(self.__grdLayout)
         return carDataWidget
 
-    def addDataElemWidget(self, labelName, row):
+    def __addDataElemWidget(self, labelName, row):
         col = 0
-        self.grdLayout.addWidget(
-            QLabel(self.tr(labelName)), row, col, self.rowSpan, self.colSpan
+        self.__grdLayout.addWidget(
+            QLabel(self.tr(labelName)), row, col, self.__rowSpan, self.__colSpan
         )
         lineEdit = QLineEdit()
         col += 1
-        self.grdLayout.addWidget(lineEdit, row, col, self.rowSpan, self.colSpan)
+        self.__grdLayout.addWidget(lineEdit, row, col, self.__rowSpan, self.__colSpan)
         return lineEdit
 
-    def createButtons(self, parent=None):
+    def __createButtons(self, parent=None):
         buttonsWidget = QWidget(parent)
-        self.addButton = QPushButton(self.tr("Add"), buttonsWidget)
-        self.cancelButton = QPushButton(self.tr("Cancel"), buttonsWidget)
+        self.__addButton = QPushButton(self.tr("Add"), buttonsWidget)
+        self.__cancelButton = QPushButton(self.tr("Cancel"), buttonsWidget)
         hbxLayout = QHBoxLayout()
         hbxLayout.addStretch(10)
-        hbxLayout.addWidget(self.addButton, 1)
-        hbxLayout.addWidget(self.cancelButton, 1)
+        hbxLayout.addWidget(self.__addButton, 1)
+        hbxLayout.addWidget(self.__cancelButton, 1)
         buttonsWidget.setLayout(hbxLayout)
         return buttonsWidget

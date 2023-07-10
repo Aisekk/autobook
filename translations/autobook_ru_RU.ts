@@ -180,4 +180,35 @@
 			<translation>Выкл</translation>
 		</message>
 	</context>
+	<context>
+		<name>AutobookDataStore</name>
+		<message>
+			<source>Brand</source>
+			<translation>Марка</translation>
+		</message>
+		<message>
+			<source>Model</source>
+			<translation>Модель</translation>
+		</message>
+		<message>
+			<source>Engine capacity, L</source>
+			<translation>Объем двигателя, л</translation>
+		</message>
+		<message>
+			<source>Manufacture year</source>
+			<translation>Год выпуска</translation>
+		</message>
+		<message>
+			<source>Body type</source>
+			<translation>Тип кузова</translation>
+		</message>
+		<message>
+			<source>State number</source>
+			<translation>Госномер</translation>
+		</message>
+		<message>
+			<source>Owner/Driver</source>
+			<translation>Владелец/Водитель</translation>
+		</message>
+	</context>
 </TS>
