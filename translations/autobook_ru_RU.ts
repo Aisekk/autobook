@@ -85,6 +85,26 @@
 			<source>Find</source>
 			<translation>Найти</translation>
 		</message>
+		<message>
+			<source>Main components and assemblies</source>
+			<translation>Основные узлы и агрегаты</translation>
+		</message>
+		<message>
+			<source>Materials</source>
+			<translation>Материалы</translation>
+		</message>
+		<message>
+			<source>Filters</source>
+			<translation>Фильтры</translation>
+		</message>
+		<message>
+			<source>Liquids</source>
+			<translation>Жидкости</translation>
+		</message>
+		<message>
+			<source>Electrics</source>
+			<translation>Электрика</translation>
+		</message>
 	</context>
 	<context>
 		<name>CarAdditionDialog</name>

@@ -1,3 +1,4 @@
+from tkinter import constants
 from PySide6.QtCore import Qt, qDebug
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
@@ -30,7 +31,7 @@ class ControlWidget(QWidget):
         vbxMainLayout.addWidget(self.__buttonsWidget, 10)
         vbxMainLayout.addWidget(self.__leSearch, 1)
         vbxMainLayout.addWidget(self.__cbxClassifier, 1)
-        vbxMainLayout.addWidget(self.__classifierView, 30)
+        vbxMainLayout.addWidget(self.__classifierView, 50)
         vbxMainLayout.addStretch(1)
         self.setLayout(vbxMainLayout)
 
@@ -49,17 +50,17 @@ class ControlWidget(QWidget):
     def getCarLabelText(self):
         # carData = storage.AutobookDataStore().getCarData()
         carData = storage.AutobookDataStore().getDefaultCarData()
-        brand = self.__getCarDataTextElem(carData.brand)
-        model = self.__getCarDataTextElem(carData.model)
-        engineCap = self.__getCarDataTextElem(carData.engineCapacity)
-        manufYear = self.__getCarDataTextElem(carData.manufactureYear)
-        gosNum = self.__getCarDataTextElem(carData.gosNumber)
-        bodyType = self.__getCarDataTextElem(carData.bodyType)
-        ownerDriver = self.__getCarDataTextElem(carData.ownerDriver)
+        brand = self.__getCarDataTextElem__(carData.brand)
+        model = self.__getCarDataTextElem__(carData.model)
+        engineCap = self.__getCarDataTextElem__(carData.engineCapacity)
+        manufYear = self.__getCarDataTextElem__(carData.manufactureYear)
+        gosNum = self.__getCarDataTextElem__(carData.gosNumber)
+        bodyType = self.__getCarDataTextElem__(carData.bodyType)
+        ownerDriver = self.__getCarDataTextElem__(carData.ownerDriver)
         text = brand + model + engineCap + manufYear + gosNum + bodyType + ownerDriver
         return text
 
-    def __getCarDataTextElem(self, elem):
+    def __getCarDataTextElem__(self, elem):
         return str("<STRONG><CENTER>" + str(elem) + "</STRONG>")
         # return str("<H4><CENTER><FONT COLOR=GREEN>" + str(elem) + "</H4>")
 
@@ -71,6 +72,13 @@ class ControlWidget(QWidget):
             self.tr("Numbers and codes"), buttonsWidget
         )
         self.__ownerDriverButton = QPushButton(self.tr("Owner/Driver"), buttonsWidget)
+
+        maxButtonWidth = 150
+        self.__basicsButton.setMaximumWidth(maxButtonWidth)
+        self.__detailsButton.setMaximumWidth(maxButtonWidth)
+        self.__numbersAndCodesButton.setMaximumWidth(maxButtonWidth)
+        self.__ownerDriverButton.setMaximumWidth(maxButtonWidth)
+
         vbxLayout = QVBoxLayout()
         vbxLayout.addWidget(self.__basicsButton, 1)
         vbxLayout.addWidget(self.__detailsButton, 1)
@@ -86,7 +94,14 @@ class ControlWidget(QWidget):
 
     def __createClassifierComboBox(self, parent=None):
         cbxClassifier = QComboBox(parent)
-        cbxClassifier.addItems(["Classifier 1", "Classifier 2"])
+        cbxClassifier.addItem(
+            self.tr("Main components and assemblies"),
+            data_store.structs.Classifier.main_components_and_assemblies,
+        )
+        cbxClassifier.addItem(self.tr("Materials"), data_store.structs.Classifier.materials)
+        cbxClassifier.addItem(self.tr("Filters"), data_store.structs.Classifier.filters)
+        cbxClassifier.addItem(self.tr("Liquids"), data_store.structs.Classifier.liquids)
+        cbxClassifier.addItem(self.tr("Electrics"), data_store.structs.Classifier.electrics)
         return cbxClassifier
 
     def __createClassifierView(self, parent=None):
