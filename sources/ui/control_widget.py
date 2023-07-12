@@ -1,4 +1,3 @@
-from tkinter import constants
 from PySide6.QtCore import Qt, qDebug
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
@@ -35,7 +34,7 @@ class ControlWidget(QWidget):
         vbxMainLayout.addStretch(1)
         self.setLayout(vbxMainLayout)
 
-    def __createCarDataDisplayWidget(self, parent=None):
+    def __createCarDataDisplayWidget(self, parent=None) -> QGroupBox:
         carGroupBox = QGroupBox(parent)
         # font = QFont("Arial", 10)
         # font.setBold(True)
@@ -47,7 +46,7 @@ class ControlWidget(QWidget):
         carGroupBox.setLayout(vbxLayout)
         return carGroupBox
 
-    def getCarLabelText(self):
+    def getCarLabelText(self) -> str:
         # carData = storage.AutobookDataStore().getCarData()
         carData = storage.AutobookDataStore().getDefaultCarData()
         brand = self.__getCarDataTextElem__(carData.brand)
@@ -60,11 +59,11 @@ class ControlWidget(QWidget):
         text = brand + model + engineCap + manufYear + gosNum + bodyType + ownerDriver
         return text
 
-    def __getCarDataTextElem__(self, elem):
+    def __getCarDataTextElem__(self, elem: str) -> str:
         return str("<STRONG><CENTER>" + str(elem) + "</STRONG>")
         # return str("<H4><CENTER><FONT COLOR=GREEN>" + str(elem) + "</H4>")
 
-    def __createButtons(self, parent=None):
+    def __createButtons(self, parent=None) -> QWidget:
         buttonsWidget = QWidget(parent)
         self.__basicsButton = QPushButton(self.tr("Basics"), buttonsWidget)
         self.__detailsButton = QPushButton(self.tr("Details"), buttonsWidget)
@@ -87,23 +86,27 @@ class ControlWidget(QWidget):
         buttonsWidget.setLayout(vbxLayout)
         return buttonsWidget
 
-    def __createSearchLineEdit(self, parent=None):
-        searchLineEdit = QLineEdit(parent)
-        searchLineEdit.setPlaceholderText(self.tr("Find") + "...")
-        return searchLineEdit
+    def __createSearchLineEdit(self, parent=None) -> QLineEdit:
+        lineEdit = QLineEdit(parent)
+        lineEdit.setPlaceholderText(self.tr("Find") + "...")
+        return lineEdit
 
-    def __createClassifierComboBox(self, parent=None):
+    def __createClassifierComboBox(self, parent=None) -> QComboBox:
         cbxClassifier = QComboBox(parent)
         cbxClassifier.addItem(
             self.tr("Main components and assemblies"),
             data_store.structs.Classifier.main_components_and_assemblies,
         )
-        cbxClassifier.addItem(self.tr("Materials"), data_store.structs.Classifier.materials)
+        cbxClassifier.addItem(
+            self.tr("Materials"), data_store.structs.Classifier.materials
+        )
         cbxClassifier.addItem(self.tr("Filters"), data_store.structs.Classifier.filters)
         cbxClassifier.addItem(self.tr("Liquids"), data_store.structs.Classifier.liquids)
-        cbxClassifier.addItem(self.tr("Electrics"), data_store.structs.Classifier.electrics)
+        cbxClassifier.addItem(
+            self.tr("Electrics"), data_store.structs.Classifier.electrics
+        )
         return cbxClassifier
 
-    def __createClassifierView(self, parent=None):
-        classifierView = QTreeView(parent)
-        return classifierView
+    def __createClassifierView(self, parent=None) -> QTreeView:
+        treeView = QTreeView(parent)
+        return treeView

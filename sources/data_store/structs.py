@@ -1,3 +1,4 @@
+import copy
 import enum
 
 
@@ -30,21 +31,41 @@ class Classifier(enum.Enum):
 
 
 class ClassifierItem(object):
-    def __init__(self, data=None, parentItem=None):
+    def __init__(self, data: list = None, parentItem=None):
+        self.id = 0
         self.__itemData = data
         self.__parentItem = parentItem
-        self.__childItems = []
+        self.__children: list[ClassifierItem] = []
 
-    def appendChild(self, child) -> None:
-        self.__childItems.append(child)
+    def addChild(self, child) -> None:
+        self.__children.append(child)
 
-    def child(self, row):
-        if row < 0 or row >= self.__childItems.size():
+    def addChildren(self, children: list) -> None:
+        for child in children:
+            child.__parentItem = self
+            self.__children.append(child)
+
+    def getChildren(self) -> list:
+        return self.__children
+
+    def takeChildren(self) -> list:
+        children = copy(self.__children)
+        self.__children.clear()
+        return children
+
+    def child(self, index: int):  # -> ClassifierItem:
+        if index < 0 or index >= self.__children.size():
             return None
-        return self.__childItems.at(row)
+        return self.__children.at(index)
+
+    def childIndex(self, item) -> int:
+        return self.__children.index(item)
 
     def childCount(self) -> int:
-        return self.__childItems.count()
+        return self.__children.count()
+
+    def hasChildren(self) -> bool:
+        return self.__children.count() == 0
 
     def columnCount(self) -> int:
         return self.__itemData.count()
@@ -57,7 +78,7 @@ class ClassifierItem(object):
     def parentItem(self):
         return self.__parentItem
 
-    def data(self, column):
+    def data(self, column: int):
         if column < 0 or column >= self.__itemData.size():
             return None
         return self.__itemData.at(column)

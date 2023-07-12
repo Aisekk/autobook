@@ -16,10 +16,10 @@ class AutobookDataStore(object):
         cls.__context = "AutobookDataStore"
         qDebug("singleton")
 
-    def getCarData(self):
+    def getCarData(self) -> data_store.structs.CarData:
         return self.__carData
 
-    def getDefaultCarData(self):
+    def getDefaultCarData(self) -> data_store.structs.CarData:
         # return data_store.structs.CarData(
         #    "Huyndai", "Solaris", "1.6L", "2012", "A123BC 152 RUS", "Sedan", "Ivanov A.S."
         # )

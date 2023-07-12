@@ -41,7 +41,7 @@ class MainWindow(QMainWindow):
         # button = QPushButton("From Go: backend.Add(10,99) = %d" % lib.Add(10,99))
         # self.setCentralWidget(button)
 
-    def __createMenus(self):
+    def __createMenus(self) -> None:
         carMenu = self.menuBar().addMenu(self.tr("Car"))
         self.__addCarAction = QAction(self.tr("Add") + "...", self)
         self.__editCarAction = QAction(self.tr("Edit"), self)
@@ -62,7 +62,7 @@ class MainWindow(QMainWindow):
         self.__aboutProgramAction = QAction(self.tr("About program"), self)
         infoMenu.addAction(self.__aboutProgramAction)
 
-    def __connectObjects(self):
+    def __connectObjects(self) -> None:
         self.__addCarAction.triggered.connect(lambda: self.__carAdditionDialog.show())
         self.__projectAction.triggered.connect(
             lambda: self.__projectSettingsDialog.show()
