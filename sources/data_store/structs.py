@@ -1,6 +1,6 @@
 import copy
 import enum
-
+from PySide6.QtCore import Qt
 
 class CarData(object):
     def __init__(
@@ -22,19 +22,24 @@ class CarData(object):
         self.ownerDriver = ownerDriver
 
 
-class Classifier(enum.Enum):
-    main_components_and_assemblies = 0
-    materials = 1
-    filters = 2
-    liquids = 3
-    electrics = 4
+class Classifier(enum.IntEnum):
+    MainComponentsAndAssemblies = 0
+    Materials = 1
+    Filters = 2
+    Liquids = 3
+    Electrics = 4
+
+class ClassifierItemRole(enum.IntEnum):
+    ItemType = Qt.ItemDataRole.UserRole
+    ItemId = Qt.ItemDataRole.UserRole + 1
 
 
 class ClassifierItem(object):
-    def __init__(self, data: list = None, parentItem=None):
+    def __init__(self, data: list, parent=None):
         self.id = 0
+        self.name = str()
         self.__itemData = data
-        self.__parentItem = parentItem
+        self.__parent = ClassifierItem(parent)
         self.__children: list[ClassifierItem] = []
 
     def addChild(self, child) -> None:
@@ -53,32 +58,32 @@ class ClassifierItem(object):
         self.__children.clear()
         return children
 
-    def child(self, index: int):  # -> ClassifierItem:
-        if index < 0 or index >= self.__children.size():
+    def child(self, index: int): #-> object
+        if index < 0 or index >= len(self.__children):
             return None
-        return self.__children.at(index)
+        return self.__children[index]
 
     def childIndex(self, item) -> int:
         return self.__children.index(item)
 
     def childCount(self) -> int:
-        return self.__children.count()
+        return len(self.__children)
 
     def hasChildren(self) -> bool:
-        return self.__children.count() == 0
+        return len(self.__children) == 0
 
     def columnCount(self) -> int:
-        return self.__itemData.count()
+        return len(self.__itemData)
 
     def row(self) -> int:
-        if self.__parentItem:
-            return self.__parentItem.__childItems.indexOf(ClassifierItem(self))
+        if self.__parent:
+            return self.__parent.__childItems.indexOf(ClassifierItem(self))
         return int(0)
 
-    def parentItem(self):
-        return self.__parentItem
+    def parent(self):
+        return self.__parent
 
     def data(self, column: int):
-        if column < 0 or column >= self.__itemData.size():
+        if column < 0 or column >= len(self.__itemData):
             return None
         return self.__itemData.at(column)

@@ -15,7 +15,7 @@ from PySide6.QtWidgets import (
 
 import data_store.autobook_data_store as storage
 import data_store.structs
-
+import models.classifier_model
 
 class ControlWidget(QWidget):
     def __init__(self, parent=None):
@@ -25,6 +25,13 @@ class ControlWidget(QWidget):
         self.__leSearch = self.__createSearchLineEdit(self)
         self.__cbxClassifier = self.__createClassifierComboBox(self)
         self.__classifierView = self.__createClassifierView(self)
+        self.__classifierModel = models.classifier_model.ClassifierModel(self.__classifierView)
+        
+        self.__classifierView.setModel(self.__classifierModel)
+        item = data_store.structs.ClassifierItem([], self.__classifierModel.invisibleRootItem())
+        item.name = "item 1"
+        self.__classifierModel.addItems(self.__classifierModel.invisibleRootItem(), [item])
+
         vbxMainLayout = QVBoxLayout()
         vbxMainLayout.addWidget(self.__carDataDisplayWidget, 10)
         vbxMainLayout.addWidget(self.__buttonsWidget, 10)
@@ -95,15 +102,15 @@ class ControlWidget(QWidget):
         cbxClassifier = QComboBox(parent)
         cbxClassifier.addItem(
             self.tr("Main components and assemblies"),
-            data_store.structs.Classifier.main_components_and_assemblies,
+            data_store.structs.Classifier.MainComponentsAndAssemblies,
         )
         cbxClassifier.addItem(
-            self.tr("Materials"), data_store.structs.Classifier.materials
+            self.tr("Materials"), data_store.structs.Classifier.Materials
         )
-        cbxClassifier.addItem(self.tr("Filters"), data_store.structs.Classifier.filters)
-        cbxClassifier.addItem(self.tr("Liquids"), data_store.structs.Classifier.liquids)
+        cbxClassifier.addItem(self.tr("Filters"), data_store.structs.Classifier.Filters)
+        cbxClassifier.addItem(self.tr("Liquids"), data_store.structs.Classifier.Liquids)
         cbxClassifier.addItem(
-            self.tr("Electrics"), data_store.structs.Classifier.electrics
+            self.tr("Electrics"), data_store.structs.Classifier.Electrics
         )
         return cbxClassifier
 
