@@ -11,6 +11,7 @@ from PySide6.QtWidgets import (
     QLabel,
     QComboBox,
     QTreeView,
+    QAbstractItemView
 )
 
 import data_store.autobook_data_store as storage
@@ -28,9 +29,16 @@ class ControlWidget(QWidget):
         self.__classifierModel = models.classifier_model.ClassifierModel(self.__classifierView)
         
         self.__classifierView.setModel(self.__classifierModel)
-        item = data_store.structs.ClassifierItem([], self.__classifierModel.invisibleRootItem())
-        item.name = "item 1"
-        self.__classifierModel.addItems(self.__classifierModel.invisibleRootItem(), [item])
+        items = [] #[data_store.structs.ClassifierItem]
+        for i in range(3):
+            item = data_store.structs.ClassifierItem()
+            item.name = "item " + str(i)
+            items.append(item)
+        #child = data_store.structs.ClassifierItem(items[0], [], "child 1")
+        #items[0].addChild(child)
+
+        self.__classifierModel.addItems(self.__classifierModel.invisibleRootItem(), items)
+        #self.__classifierModel.addItems(items[0], [child])
 
         vbxMainLayout = QVBoxLayout()
         vbxMainLayout.addWidget(self.__carDataDisplayWidget, 10)
@@ -116,4 +124,7 @@ class ControlWidget(QWidget):
 
     def __createClassifierView(self, parent=None) -> QTreeView:
         treeView = QTreeView(parent)
+        treeView.setHeaderHidden(True)
+        treeView.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        treeView.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectItems)
         return treeView

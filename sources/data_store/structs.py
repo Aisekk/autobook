@@ -2,6 +2,7 @@ import copy
 import enum
 from PySide6.QtCore import Qt
 
+
 class CarData(object):
     def __init__(
         self,
@@ -29,23 +30,26 @@ class Classifier(enum.IntEnum):
     Liquids = 3
     Electrics = 4
 
+
 class ClassifierItemRole(enum.IntEnum):
     ItemType = Qt.ItemDataRole.UserRole
     ItemId = Qt.ItemDataRole.UserRole + 1
 
 
 class ClassifierItem(object):
-    def __init__(self, data: list, parent=None):
+    def __init__(self, parent=None, data=list(), name=str()):
         self.id = 0
-        self.name = str()
+        self.name = name
+        self.__parent = parent
+        if parent:
+            self.__parent = ClassifierItem(parent)
         self.__itemData = data
-        self.__parent = ClassifierItem(parent)
         self.__children: list[ClassifierItem] = []
 
     def addChild(self, child) -> None:
         self.__children.append(child)
 
-    def addChildren(self, children: list) -> None:
+    def addChildren(self, children) -> None:
         for child in children:
             child.__parentItem = self
             self.__children.append(child)
@@ -58,7 +62,7 @@ class ClassifierItem(object):
         self.__children.clear()
         return children
 
-    def child(self, index: int): #-> object
+    def child(self, index: int):
         if index < 0 or index >= len(self.__children):
             return None
         return self.__children[index]
@@ -81,7 +85,7 @@ class ClassifierItem(object):
         return int(0)
 
     def parent(self):
-        return self.__parent
+        return self.__parent if self.__parent else None
 
     def data(self, column: int):
         if column < 0 or column >= len(self.__itemData):
