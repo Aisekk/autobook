@@ -15,8 +15,8 @@ from PySide6.QtWidgets import (
 )
 
 import data_store.autobook_data_store as storage
-import data_store.structs
-import models.classifier_model
+import data_store.structs as structs
+import models.classifier_model as classifier_model
 
 class ControlWidget(QWidget):
     def __init__(self, parent=None):
@@ -26,19 +26,22 @@ class ControlWidget(QWidget):
         self.__leSearch = self.__createSearchLineEdit(self)
         self.__cbxClassifier = self.__createClassifierComboBox(self)
         self.__classifierView = self.__createClassifierView(self)
-        self.__classifierModel = models.classifier_model.ClassifierModel(self.__classifierView)
+        self.__classifierModel = classifier_model.ClassifierModel(self.__classifierView)
         
         self.__classifierView.setModel(self.__classifierModel)
-        items = [] #[data_store.structs.ClassifierItem]
+        items = [] 
         for i in range(3):
-            item = data_store.structs.ClassifierItem()
+            item = structs.ClassifierItem(self.__classifierModel.invisibleRootItem())
             item.name = "item " + str(i)
             items.append(item)
-        #child = data_store.structs.ClassifierItem(items[0], [], "child 1")
-        #items[0].addChild(child)
+        
+        child = structs.ClassifierItem(items[0], [], "child 0")
+        child1 = structs.ClassifierItem(items[0], [], "child 1")
+        items[0].addChild(child1)
+        qDebug("child name: " + items[0].child(0).name)
 
         self.__classifierModel.addItems(self.__classifierModel.invisibleRootItem(), items)
-        #self.__classifierModel.addItems(items[0], [child])
+        self.__classifierModel.addItems(items[0], [child])
 
         vbxMainLayout = QVBoxLayout()
         vbxMainLayout.addWidget(self.__carDataDisplayWidget, 10)
@@ -110,15 +113,15 @@ class ControlWidget(QWidget):
         cbxClassifier = QComboBox(parent)
         cbxClassifier.addItem(
             self.tr("Main components and assemblies"),
-            data_store.structs.Classifier.MainComponentsAndAssemblies,
+            structs.Classifier.MainComponentsAndAssemblies,
         )
         cbxClassifier.addItem(
-            self.tr("Materials"), data_store.structs.Classifier.Materials
+            self.tr("Materials"), structs.Classifier.Materials
         )
-        cbxClassifier.addItem(self.tr("Filters"), data_store.structs.Classifier.Filters)
-        cbxClassifier.addItem(self.tr("Liquids"), data_store.structs.Classifier.Liquids)
+        cbxClassifier.addItem(self.tr("Filters"), structs.Classifier.Filters)
+        cbxClassifier.addItem(self.tr("Liquids"), structs.Classifier.Liquids)
         cbxClassifier.addItem(
-            self.tr("Electrics"), data_store.structs.Classifier.Electrics
+            self.tr("Electrics"), structs.Classifier.Electrics
         )
         return cbxClassifier
 

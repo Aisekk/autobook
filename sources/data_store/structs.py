@@ -40,9 +40,7 @@ class ClassifierItem(object):
     def __init__(self, parent=None, data=list(), name=str()):
         self.id = 0
         self.name = name
-        self.__parent = parent
-        if parent:
-            self.__parent = ClassifierItem(parent)
+        self.__parent: ClassifierItem = parent
         self.__itemData = data
         self.__children: list[ClassifierItem] = []
 
@@ -85,7 +83,7 @@ class ClassifierItem(object):
         return int(0)
 
     def parent(self):
-        return self.__parent if self.__parent else None
+        return self.__parent
 
     def data(self, column: int):
         if column < 0 or column >= len(self.__itemData):
