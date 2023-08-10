@@ -1,0 +1,41 @@
+{
+  "Basics": {
+    "Brand": "Hyundai",
+    "Model": "Solaris",
+    "ManufYear": 2012,
+    "GosNumber": "A555AA152RUS",
+    "BodyType": "sedan",
+    "Owner": "Aleks",
+    "ManufWarranty": "5 years"
+  },
+  "Engine": {
+    "Capacity": "1.6",
+    "ManufCountry": "South Korea"
+  },
+  "Body": {
+    "Color": "gray"
+  },
+  "PowerSystem": {},
+  "CoolingSystem": {},
+  "LubricationSystem": {},
+  "ExhaustSystem": {},
+  "TransmissionSystem": {},
+  "Clutch": {},
+  "Gearbox": {},
+  "WheelDrive": {},
+  "Сhassis": {},
+  "FrontSuspension": {},
+  "RearSuspension": {},
+  "Wheels": {},
+  "Tires": {},
+  "Steering": {},
+  "BrakeSystem": {
+    "ServiceBrakeSystem": {},
+    "ParkingBrakeSystem": {}
+  },
+  "ElectricalEquipment": {
+    "ElectricitySources": {},
+    "ElectricityConsumers": {}
+  },
+  "AdditionalEquipment": {}
+}
