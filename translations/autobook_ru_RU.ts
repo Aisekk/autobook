@@ -90,6 +90,10 @@
 			<translation>Основные узлы и агрегаты</translation>
 		</message>
 		<message>
+			<source>Mechanisms</source>
+			<translation>Механизмы</translation>
+		</message>
+		<message>
 			<source>Materials</source>
 			<translation>Материалы</translation>
 		</message>

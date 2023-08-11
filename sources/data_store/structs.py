@@ -25,10 +25,11 @@ class CarData(object):
 
 class Classifier(enum.IntEnum):
     MainComponentsAndAssemblies = 0
-    Materials = 1
-    Filters = 2
-    Liquids = 3
-    Electrics = 4
+    Mechanisms = 1
+    Materials = 2
+    Filters = 3
+    Liquids = 4
+    Electrics = 5
 
 
 class ClassifierItemRole(enum.IntEnum):

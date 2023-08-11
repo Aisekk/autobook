@@ -116,6 +116,9 @@ class ControlWidget(QWidget):
             structs.Classifier.MainComponentsAndAssemblies,
         )
         cbxClassifier.addItem(
+            self.tr("Mechanisms"), structs.Classifier.Mechanisms
+        )
+        cbxClassifier.addItem(
             self.tr("Materials"), structs.Classifier.Materials
         )
         cbxClassifier.addItem(self.tr("Filters"), structs.Classifier.Filters)
