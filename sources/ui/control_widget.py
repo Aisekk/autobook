@@ -31,13 +31,13 @@ class ControlWidget(QWidget):
 
         self.__classifierView.setModel(self.__classifierModel)
 
-        #items = storage.AutobookDataStore().getItems(
-        #    structs.Classifier.MainComponentsAndAssemblies,
-        #    self.__classifierModel.invisibleRootItem(),
-        #)
-        #self.__classifierModel.addItems(
-        #    self.__classifierModel.invisibleRootItem(), items
-        #)
+        items = storage.AutobookDataStore().getItems(
+            structs.Classifier.MainComponentsAndAssemblies,
+            self.__classifierModel.invisibleRootItem(),
+        )
+        self.__classifierModel.addItems(
+            self.__classifierModel.invisibleRootItem(), items
+        )
         # self.__classifierModel.addItems(items[0], [child])
 
         vbxMainLayout = QVBoxLayout()

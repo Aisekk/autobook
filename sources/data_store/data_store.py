@@ -2,6 +2,7 @@ from PySide6.QtCore import qDebug
 from PySide6.QtCore import QCoreApplication
 
 import data_store.structs as structs
+import data_store.const_info as const_info
 from items.classifier_item import ClassifierItem, ClassifierItemRole
 
 
@@ -34,15 +35,21 @@ class AutobookDataStore(object):
             str(QCoreApplication.translate(self.__context, "Owner/Driver")),
         )
 
-    def getItems(classifier, parent) -> list[ClassifierItem]:
+    def getItems(self, classifier, parent) -> list[ClassifierItem]:
         items = []
         if classifier == structs.Classifier.MainComponentsAndAssemblies:
-            for i in range(3):
-                item = ClassifierItem(parent)
-                item.name = "item " + str(i)
+            for index, name in const_info.groups.items():
+                item = ClassifierItem(parent, name)
+                item.id = index
                 items.append(item)
-            child = ClassifierItem(items[0], [], "child 0")
-            child1 = ClassifierItem(items[0], [], "child 1")
-            items[0].addChild(child1)
-            qDebug("child name: " + items[0].child(0).name)
+            item = ClassifierItem(items[0], const_info.main_components.get(structs.MainComponents.Engine))
+            items[0].addChildren([item])
+            #for i in range(3):
+            #    item = ClassifierItem(parent)
+            #    item.name = "item " + str(i)
+            #    items.append(item)
+            #child = ClassifierItem(items[0], [], "child 0")
+            #child1 = ClassifierItem(items[0], [], "child 1")
+            #items[0].addChild(child1)
+            #qDebug("child name: " + items[0].child(0).name)
         return items
