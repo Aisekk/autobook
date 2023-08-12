@@ -2,21 +2,22 @@ from PySide6.QtCore import Qt, qDebug
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
     QWidget,
-    QHBoxLayout,
     QVBoxLayout,
-    QGridLayout,
     QGroupBox,
     QPushButton,
     QLineEdit,
     QLabel,
     QComboBox,
     QTreeView,
-    QAbstractItemView
+    QAbstractItemView,
 )
 
-import data_store.autobook_data_store as storage
+import data_store.data_store as storage
 import data_store.structs as structs
 import models.classifier_model as classifier_model
+import items.classifier_item as classifier_item
+import data_store.const_info as const_info
+
 
 class ControlWidget(QWidget):
     def __init__(self, parent=None):
@@ -27,21 +28,17 @@ class ControlWidget(QWidget):
         self.__cbxClassifier = self.__createClassifierComboBox(self)
         self.__classifierView = self.__createClassifierView(self)
         self.__classifierModel = classifier_model.ClassifierModel(self.__classifierView)
-        
-        self.__classifierView.setModel(self.__classifierModel)
-        items = [] 
-        for i in range(3):
-            item = structs.ClassifierItem(self.__classifierModel.invisibleRootItem())
-            item.name = "item " + str(i)
-            items.append(item)
-        
-        child = structs.ClassifierItem(items[0], [], "child 0")
-        child1 = structs.ClassifierItem(items[0], [], "child 1")
-        items[0].addChild(child1)
-        qDebug("child name: " + items[0].child(0).name)
 
-        self.__classifierModel.addItems(self.__classifierModel.invisibleRootItem(), items)
-        self.__classifierModel.addItems(items[0], [child])
+        self.__classifierView.setModel(self.__classifierModel)
+
+        #items = storage.AutobookDataStore().getItems(
+        #    structs.Classifier.MainComponentsAndAssemblies,
+        #    self.__classifierModel.invisibleRootItem(),
+        #)
+        #self.__classifierModel.addItems(
+        #    self.__classifierModel.invisibleRootItem(), items
+        #)
+        # self.__classifierModel.addItems(items[0], [child])
 
         vbxMainLayout = QVBoxLayout()
         vbxMainLayout.addWidget(self.__carDataDisplayWidget, 10)
@@ -111,21 +108,8 @@ class ControlWidget(QWidget):
 
     def __createClassifierComboBox(self, parent=None) -> QComboBox:
         cbxClassifier = QComboBox(parent)
-        cbxClassifier.addItem(
-            self.tr("Main components and assemblies"),
-            structs.Classifier.MainComponentsAndAssemblies,
-        )
-        cbxClassifier.addItem(
-            self.tr("Mechanisms"), structs.Classifier.Mechanisms
-        )
-        cbxClassifier.addItem(
-            self.tr("Materials"), structs.Classifier.Materials
-        )
-        cbxClassifier.addItem(self.tr("Filters"), structs.Classifier.Filters)
-        cbxClassifier.addItem(self.tr("Liquids"), structs.Classifier.Liquids)
-        cbxClassifier.addItem(
-            self.tr("Electrics"), structs.Classifier.Electrics
-        )
+        for index, name in const_info.classifiers.items():
+            cbxClassifier.addItem(self.tr(name), index)
         return cbxClassifier
 
     def __createClassifierView(self, parent=None) -> QTreeView:

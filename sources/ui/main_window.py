@@ -14,7 +14,7 @@ from PySide6.QtGui import QAction, QIcon
 import ui.control_widget
 import ui.car_addition_dialog
 import ui.project_settings_dialog
-import data_store.autobook_data_store as storage
+import data_store.data_store as storage
 
 
 class MainWindow(QMainWindow):

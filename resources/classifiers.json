@@ -1,0 +1,48 @@
+{
+  "Classifiers": [
+    {
+      "id": 0,
+      "name": "Main components and assemblies"
+    }
+  ],
+  {
+    "Brand": "Hyundai",
+    "Model": "Solaris",
+    "ManufYear": 2012,
+    "GosNumber": "A555AA152RUS",
+    "BodyType": "седан",
+    "Owner": "Алекс",
+    "ManufWarranty": "5 лет"
+  },
+  "Engine": {
+    "Capacity": "1.6",
+    "ManufCountry": "Южная Корея",
+    "Type": 0
+  },
+  "Body": {
+    "Color": "серый"
+  },
+  "PowerSystem": {},
+  "CoolingSystem": {},
+  "LubricationSystem": {},
+  "ExhaustSystem": {},
+  "TransmissionSystem": {},
+  "Clutch": {},
+  "Gearbox": {},
+  "WheelDrive": {},
+  "Сhassis": {},
+  "FrontSuspension": {},
+  "RearSuspension": {},
+  "Wheels": {},
+  "Tires": {},
+  "Steering": {},
+  "BrakeSystem": {
+    "ServiceBrakeSystem": {},
+    "ParkingBrakeSystem": {}
+  },
+  "ElectricalEquipment": {
+    "ElectricitySources": {},
+    "ElectricityConsumers": {}
+  },
+  "AdditionalEquipment": {}
+}
