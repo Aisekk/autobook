@@ -17,7 +17,7 @@ qDebug("123")
 # print(PySide6.QtCore.__version__)
 
 window = MainWindow()
-window.resize(1000, 800)
+window.resize(1200, 800)
 window.show()
 
 sys.exit(app.exec())

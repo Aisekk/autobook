@@ -111,6 +111,105 @@
 		</message>
 	</context>
 	<context>
+		<name>ClassifierModel</name>
+		<message>
+			<source>Engine and its systems</source>
+			<translation>Двигатель и его системы</translation>
+		</message>
+		<message>
+			<source>Transmission system</source>
+			<translation>Трансмиссионная система</translation>
+		</message>
+		<message>
+			<source>Chassis</source>
+			<translation>Ходовая часть</translation>
+		</message>
+		<message>
+			<source>Body</source>
+			<translation>Кузов</translation>
+		</message>
+		<message>
+			<source>Steering</source>
+			<translation>Рулевое управление</translation>
+		</message>
+		<message>
+			<source>Brake system</source>
+			<translation>Тормозная система</translation>
+		</message>
+		<message>
+			<source>Electrical equipment</source>
+			<translation>Электрооборудование</translation>
+		</message>
+		<message>
+			<source>Additional equipment</source>
+			<translation>Доп. оборудование</translation>
+		</message>
+		<message>
+			<source>Engine</source>
+			<translation>Двигатель</translation>
+		</message>
+		<message>
+			<source>Power system</source>
+			<translation>Система питания</translation>
+		</message>
+		<message>
+			<source>Cooling system</source>
+			<translation>Система охлаждения</translation>
+		</message>
+		<message>
+			<source>Lubrication system</source>
+			<translation>Система смазки</translation>
+		</message>
+		<message>
+			<source>Exhaust system</source>
+			<translation>Система выпуска отработавших газов</translation>
+		</message>
+		<message>
+			<source>Clutch</source>
+			<translation>Сцепление</translation>
+		</message>
+		<message>
+			<source>Gearbox</source>
+			<translation>КПП</translation>
+		</message>
+		<message>
+			<source>Wheel drive</source>
+			<translation>Привода колес</translation>
+		</message>
+		<message>
+			<source>Front suspension</source>
+			<translation>Передняя подвеска</translation>
+		</message>
+		<message>
+			<source>Rear suspension</source>
+			<translation>Задняя подвеска</translation>
+		</message>
+		<message>
+			<source>Wheels</source>
+			<translation>Диски</translation>
+		</message>
+		<message>
+			<source>Tires</source>
+			<translation>Шины</translation>
+		</message>
+		<message>
+			<source>Service brake system</source>
+			<translation>Рабочая тормозная система</translation>
+		</message>
+		<message>
+			<source>Parking brake system</source>
+			<translation>Стояночная тормозная система</translation>
+		</message>
+		<message>
+			<source>Electricity sources</source>
+			<translation>Источники электроэнергии</translation>
+		</message>
+		<message>
+			<source>Electricity consumers</source>
+			<translation>Потребители электроэнергии</translation>
+		</message>
+	</context>
+	<context>
 		<name>CarAdditionDialog</name>
 		<message>
 			<source>Add new car</source>

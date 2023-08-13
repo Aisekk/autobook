@@ -51,7 +51,7 @@ class ClassifierModel(QAbstractItemModel):
             return result
         if role == Qt.ItemDataRole.DisplayRole or role == Qt.ItemDataRole.ToolTipRole:
             if index.column() == 0:
-                return item.name
+                return self.tr(item.name)
         elif role == ClassifierItemRole.ItemId:
             if index.column() == 0:
                 result = item.id

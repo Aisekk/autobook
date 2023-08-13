@@ -10,14 +10,14 @@ classifiers = {
 }
 
 groups = {
-    s.Groups.EngineAndItsSystems: "EngineAndItsSystems",
-    s.Groups.TransmissionSystem: "TransmissionSystem",
+    s.Groups.EngineAndItsSystems: "Engine and its systems",
+    s.Groups.TransmissionSystem: "Transmission system",
     s.Groups.Chassis: "Chassis",
     s.Groups.Body: "Body",
     s.Groups.Steering: "Steering",
-    s.Groups.BrakeSystem: "BrakeSystem",
-    s.Groups.ElectricalEquipment: "ElectricalEquipment",
-    s.Groups.AdditionalEquipment: "AdditionalEquipment",
+    s.Groups.BrakeSystem: "Brake system",
+    s.Groups.ElectricalEquipment: "Electrical equipment",
+    s.Groups.AdditionalEquipment: "Additional equipment",
 }
 
 main_components = {

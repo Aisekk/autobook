@@ -16,7 +16,6 @@ class AutobookDataStore(object):
     def __initialize(cls):
         cls.__carData = structs.CarData("Huyndai", "Solaris")
         cls.__context = "AutobookDataStore"
-        qDebug("singleton")
 
     def getCarData(self) -> structs.CarData:
         return self.__carData
@@ -35,21 +34,63 @@ class AutobookDataStore(object):
             str(QCoreApplication.translate(self.__context, "Owner/Driver")),
         )
 
-    def getItems(self, classifier, parent) -> list[ClassifierItem]:
+    def getItems(self, classifier, parent: ClassifierItem) -> list[ClassifierItem]:
         items = []
         if classifier == structs.Classifier.MainComponentsAndAssemblies:
             for index, name in const_info.groups.items():
-                item = ClassifierItem(parent, name)
-                item.id = index
+                item = ClassifierItem(parent, index, name)
+                item.isGroup = True
                 items.append(item)
-            item = ClassifierItem(items[0], const_info.main_components.get(structs.MainComponents.Engine))
-            items[0].addChildren([item])
-            #for i in range(3):
-            #    item = ClassifierItem(parent)
-            #    item.name = "item " + str(i)
-            #    items.append(item)
-            #child = ClassifierItem(items[0], [], "child 0")
-            #child1 = ClassifierItem(items[0], [], "child 1")
-            #items[0].addChild(child1)
-            #qDebug("child name: " + items[0].child(0).name)
+            for item in items:
+                children = self.__getMainComponentsItems(item)
+                item.addChildren(children)
+        return items
+
+    def __getMainComponentsItems(self, parent: ClassifierItem):
+        items = []
+        ids = []
+        mc = const_info.main_components
+
+        if parent.id == structs.Groups.EngineAndItsSystems:
+            ids = [
+                structs.MainComponents.Engine,
+                structs.MainComponents.PowerSystem,
+                structs.MainComponents.CoolingSystem,
+                structs.MainComponents.LubricationSystem,
+                structs.MainComponents.ExhaustSystem,
+            ]
+        elif parent.id == structs.Groups.TransmissionSystem:
+            ids = [
+                structs.MainComponents.Clutch,
+                structs.MainComponents.Gearbox,
+                structs.MainComponents.WheelDrive,
+            ]
+        elif parent.id == structs.Groups.Chassis:
+            ids = [
+                structs.MainComponents.FrontSuspension,
+                structs.MainComponents.RearSuspension,
+                structs.MainComponents.Wheels,
+                structs.MainComponents.Tires,
+            ]
+        elif parent.id == structs.Groups.Body:
+            ids = []
+        elif parent.id == structs.Groups.Steering:
+            ids = []
+        elif parent.id == structs.Groups.BrakeSystem:
+            ids = [
+                structs.MainComponents.ServiceBrakeSystem,
+                structs.MainComponents.ParkingBrakeSystem,
+            ]
+        elif parent.id == structs.Groups.ElectricalEquipment:
+            ids = [
+                structs.MainComponents.ElectricitySources,
+                structs.MainComponents.ElectricityConsumers,
+            ]
+        elif parent.id == structs.Groups.AdditionalEquipment:
+            ids = []
+
+        for id in ids:
+            item = ClassifierItem(parent, id, mc.get(id))
+            items.append(item)
+
         return items

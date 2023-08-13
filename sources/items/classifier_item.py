@@ -8,11 +8,11 @@ class ClassifierItemRole(enum.IntEnum):
 
 
 class ClassifierItem(object):
-    def __init__(self, parent=None, name=str(), data=list()):
-        self.id = 0
+    def __init__(self, parent=None, id=int(), name=str(), data=list()):
+        self.__parent: ClassifierItem = parent
+        self.id = id
         self.name = name
         self.isGroup = False
-        self.__parent: ClassifierItem = parent
         self.__itemData = data
         self.__children: list[ClassifierItem] = []
 
@@ -21,7 +21,6 @@ class ClassifierItem(object):
 
     def addChildren(self, children) -> None:
         for child in children:
-            #child.__parentItem = self
             self.__children.append(child)
 
     def getChildren(self) -> list:
