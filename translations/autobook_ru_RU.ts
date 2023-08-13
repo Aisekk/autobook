@@ -111,6 +111,57 @@
 		</message>
 	</context>
 	<context>
+		<name>EngineWidget</name>
+		<message>
+			<source>Engine capacity, l</source>
+			<translation>Объем двигателя, л</translation>
+		</message>
+		<message>
+			<source>Fuel combustion type</source>
+			<translation>Тип сгорания топлива</translation>
+		</message>
+		<message>
+			<source>Design type</source>
+			<translation>Тип конструкции</translation>
+		</message>
+		<message>
+			<source>Cylinder arrangement</source>
+			<translation>Расположение цилиндров</translation>
+		</message>
+		<message>
+			<source>Cylinders number</source>
+			<translation>Количество цилиндров</translation>
+		</message>
+		<message>
+			<source>Fuel type</source>
+			<translation>Тип топлива</translation>
+		</message>
+		<message>
+			<source>Tact</source>
+			<translation>Тактность</translation>
+		</message>
+		<message>
+			<source>Combustible mixture formation</source>
+			<translation>Образование горючей смеси</translation>
+		</message>
+		<message>
+			<source>Cooling system</source>
+			<translation>Система охлаждения</translation>
+		</message>
+		<message>
+			<source>GDM Drive design</source>
+			<translation>Конструкция привода ГРМ</translation>
+		</message>
+		<message>
+			<source>Location</source>
+			<translation>Расположение в отсеке мотора</translation>
+		</message>
+		<message>
+			<source>Air pressure</source>
+			<translation>Давление воздуха</translation>
+		</message>
+	</context>
+	<context>
 		<name>ClassifierModel</name>
 		<message>
 			<source>Engine and its systems</source>

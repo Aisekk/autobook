@@ -15,13 +15,14 @@ from PySide6.QtGui import QAction, QIcon
 import ui.control_widget
 import ui.car_addition_dialog
 import ui.project_settings_dialog
+import ui.widgets.engine_widget
+
 import data_store.data_store as storage
 
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
-        # super().__init__()
         self.setWindowTitle(self.tr("Autobook"))
         self.setWindowIcon(QIcon("./sources/icons/cabriolet.png"))
         self.__createMenus()
@@ -32,7 +33,10 @@ class MainWindow(QMainWindow):
         self.__controlWidget = ui.control_widget.ControlWidget()
         self.__stackedWidget = QStackedWidget()
         self.__emptyWidget = QWidget()
+        self.__engineWidget = ui.widgets.engine_widget.EngineWidget()
+
         self.__stackedWidget.addWidget(self.__emptyWidget)
+        self.__stackedWidget.addWidget(self.__engineWidget)
 
         centralWidget = QWidget(self)
         hbxMainLayout = QHBoxLayout()
@@ -41,7 +45,8 @@ class MainWindow(QMainWindow):
         centralWidget.setLayout(hbxMainLayout)
         self.setCentralWidget(centralWidget)
 
-        self.__stackedWidget.setCurrentWidget(self.__emptyWidget)
+        #self.__stackedWidget.setCurrentWidget(self.__emptyWidget)
+        self.__stackedWidget.setCurrentWidget(self.__engineWidget)
 
         self.__connectObjects()
         # button = QPushButton("From Go: backend.Add(10,99) = %d" % lib.Add(10,99))
