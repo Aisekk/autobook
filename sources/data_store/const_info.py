@@ -9,18 +9,16 @@ classifiers = {
     s.Classifier.Electrics: "Electrics",
 }
 
-groups = {
-    s.Groups.EngineAndItsSystems: "Engine and its systems",
-    s.Groups.TransmissionSystem: "Transmission system",
-    s.Groups.Chassis: "Chassis",
-    s.Groups.Body: "Body",
-    s.Groups.Steering: "Steering",
-    s.Groups.BrakeSystem: "Brake system",
-    s.Groups.ElectricalEquipment: "Electrical equipment",
-    s.Groups.AdditionalEquipment: "Additional equipment",
-}
 
 main_components = {
+    s.MainComponents.EngineAndItsSystems: "Engine and its systems",
+    s.MainComponents.TransmissionSystem: "Transmission system",
+    s.MainComponents.Chassis: "Chassis",
+    s.MainComponents.Body: "Body",
+    s.MainComponents.Steering: "Steering",
+    s.MainComponents.BrakeSystem: "Brake system",
+    s.MainComponents.ElectricalEquipment: "Electrical equipment",
+    s.MainComponents.AdditionalEquipment: "Additional equipment",
     s.MainComponents.Engine: "Engine",
     s.MainComponents.PowerSystem: "Power system",
     s.MainComponents.CoolingSystem: "Cooling system",

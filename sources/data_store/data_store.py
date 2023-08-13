@@ -36,11 +36,19 @@ class AutobookDataStore(object):
 
     def getItems(self, classifier, parent: ClassifierItem) -> list[ClassifierItem]:
         items = []
+        mc = const_info.main_components
         if classifier == structs.Classifier.MainComponentsAndAssemblies:
-            for index, name in const_info.groups.items():
-                item = ClassifierItem(parent, index, name)
-                item.isGroup = True
-                items.append(item)
+            for index, name in mc.items():
+                if index < structs.MainComponents.Engine:
+                    item = ClassifierItem(parent, index, name)
+                    if (
+                        index == structs.MainComponents.Body
+                        or index == structs.MainComponents.Steering
+                    ):
+                        item.isGroup = False
+                    else:
+                        item.isGroup = True
+                    items.append(item)
             for item in items:
                 children = self.__getMainComponentsItems(item)
                 item.addChildren(children)
@@ -51,7 +59,7 @@ class AutobookDataStore(object):
         ids = []
         mc = const_info.main_components
 
-        if parent.id == structs.Groups.EngineAndItsSystems:
+        if parent.id == structs.MainComponents.EngineAndItsSystems:
             ids = [
                 structs.MainComponents.Engine,
                 structs.MainComponents.PowerSystem,
@@ -59,34 +67,34 @@ class AutobookDataStore(object):
                 structs.MainComponents.LubricationSystem,
                 structs.MainComponents.ExhaustSystem,
             ]
-        elif parent.id == structs.Groups.TransmissionSystem:
+        elif parent.id == structs.MainComponents.TransmissionSystem:
             ids = [
                 structs.MainComponents.Clutch,
                 structs.MainComponents.Gearbox,
                 structs.MainComponents.WheelDrive,
             ]
-        elif parent.id == structs.Groups.Chassis:
+        elif parent.id == structs.MainComponents.Chassis:
             ids = [
                 structs.MainComponents.FrontSuspension,
                 structs.MainComponents.RearSuspension,
                 structs.MainComponents.Wheels,
                 structs.MainComponents.Tires,
             ]
-        elif parent.id == structs.Groups.Body:
+        elif parent.id == structs.MainComponents.Body:
             ids = []
-        elif parent.id == structs.Groups.Steering:
+        elif parent.id == structs.MainComponents.Steering:
             ids = []
-        elif parent.id == structs.Groups.BrakeSystem:
+        elif parent.id == structs.MainComponents.BrakeSystem:
             ids = [
                 structs.MainComponents.ServiceBrakeSystem,
                 structs.MainComponents.ParkingBrakeSystem,
             ]
-        elif parent.id == structs.Groups.ElectricalEquipment:
+        elif parent.id == structs.MainComponents.ElectricalEquipment:
             ids = [
                 structs.MainComponents.ElectricitySources,
                 structs.MainComponents.ElectricityConsumers,
             ]
-        elif parent.id == structs.Groups.AdditionalEquipment:
+        elif parent.id == structs.MainComponents.AdditionalEquipment:
             ids = []
 
         for id in ids:

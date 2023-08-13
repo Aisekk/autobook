@@ -9,7 +9,7 @@ app = QApplication(sys.argv)
 translator = QTranslator()
 if translator.load("./translations/autobook_ru_RU.qm"):
     QCoreApplication.installTranslator(translator)
-qDebug("123")
+#qDebug("123")
 
 # Prints PySide6 version
 # print(PySide6.__version__)

@@ -29,7 +29,8 @@ class Classifier(enum.IntEnum):
     Liquids = 4
     Electrics = 5
 
-class Groups(enum.IntEnum):
+
+class MainComponents(enum.IntEnum):
     EngineAndItsSystems = 0
     TransmissionSystem = 1
     Chassis = 2
@@ -38,21 +39,19 @@ class Groups(enum.IntEnum):
     BrakeSystem = 5
     ElectricalEquipment = 6
     AdditionalEquipment = 7
-
-class MainComponents(enum.IntEnum):
-    Engine = 0    
-    PowerSystem = 1
-    CoolingSystem = 2
-    LubricationSystem = 3
-    ExhaustSystem = 4    
-    Clutch = 5
-    Gearbox = 6
-    WheelDrive = 7
-    FrontSuspension = 8
-    RearSuspension = 9
-    Wheels = 10
-    Tires = 11
-    ServiceBrakeSystem = 12
-    ParkingBrakeSystem = 13
-    ElectricitySources = 14
-    ElectricityConsumers = 15
+    Engine = 8
+    PowerSystem = 9
+    CoolingSystem = 10
+    LubricationSystem = 11
+    ExhaustSystem = 12
+    Clutch = 13
+    Gearbox = 14
+    WheelDrive = 15
+    FrontSuspension = 16
+    RearSuspension = 17
+    Wheels = 18
+    Tires = 19
+    ServiceBrakeSystem = 20
+    ParkingBrakeSystem = 21
+    ElectricitySources = 22
+    ElectricityConsumers = 23
