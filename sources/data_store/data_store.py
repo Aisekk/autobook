@@ -57,8 +57,7 @@ class AutobookDataStore(object):
     def __getMainComponentsItems(self, parent: ClassifierItem):
         items = []
         ids = []
-        mc = const_info.main_components
-
+        
         if parent.id == structs.MainComponents.EngineAndItsSystems:
             ids = [
                 structs.MainComponents.Engine,
@@ -97,6 +96,7 @@ class AutobookDataStore(object):
         elif parent.id == structs.MainComponents.AdditionalEquipment:
             ids = []
 
+        mc = const_info.main_components
         for id in ids:
             item = ClassifierItem(parent, id, mc.get(id))
             items.append(item)

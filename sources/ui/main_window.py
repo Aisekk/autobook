@@ -1,13 +1,14 @@
 from ast import Add
 from client import lib
 
-from PySide6.QtCore import Qt
+# from PySide6.QtCore import Qt, QCoreApplication
 from PySide6.QtWidgets import (
     QMainWindow,
     QWidget,
     QHBoxLayout,
     QPushButton,
     QMessageBox,
+    QStackedWidget,
 )
 from PySide6.QtGui import QAction, QIcon
 
@@ -29,13 +30,18 @@ class MainWindow(QMainWindow):
             self
         )
         self.__controlWidget = ui.control_widget.ControlWidget()
+        self.__stackedWidget = QStackedWidget()
+        self.__emptyWidget = QWidget()
+        self.__stackedWidget.addWidget(self.__emptyWidget)
 
         centralWidget = QWidget(self)
         hbxMainLayout = QHBoxLayout()
         hbxMainLayout.addWidget(self.__controlWidget, 10)
-        hbxMainLayout.addWidget(QWidget(), 40)
+        hbxMainLayout.addWidget(self.__stackedWidget, 40)
         centralWidget.setLayout(hbxMainLayout)
         self.setCentralWidget(centralWidget)
+
+        self.__stackedWidget.setCurrentWidget(self.__emptyWidget)
 
         self.__connectObjects()
         # button = QPushButton("From Go: backend.Add(10,99) = %d" % lib.Add(10,99))
@@ -72,5 +78,6 @@ class MainWindow(QMainWindow):
                 self,
                 self.tr("About program"),
                 self.tr("Autobook v0.0.0.0\nCopyright (c) 2023 Aleksandr Chekmarev"),
+                # QCoreApplication.translate("MainWindow", "Autobook v0.0.0.0\nCopyright (c) 2023 Aleksandr Chekmarev")
             )
         )

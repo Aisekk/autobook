@@ -4,12 +4,8 @@
 	<context>
 		<name>main</name>
 		<message>
-			<source>Hello world</source>
-			<translation>Привет</translation>
-		</message>
-		<message>
-			<source>Current Language changed to %1</source>
-			<translation>Current Language changed to %1</translation>
+			<source>main</source>
+			<translation></translation>
 		</message>
 	</context>
 	<context>
@@ -57,6 +53,10 @@
 		<message>
 			<source>About program</source>
 			<translation>О программе</translation>
+		</message>
+		<message>
+			<source>Autobook v0.0.0.0\nCopyright (c) 2023 Aleksandr Chekmarev</source>
+			<translation>Автокнига v0.0.0.0\nCopyright (c) 2023 Александр Чекмарев</translation>
 		</message>
 	</context>
 	<context>

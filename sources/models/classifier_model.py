@@ -18,7 +18,6 @@ class ClassifierModel(QAbstractItemModel):
         if parent != self.__root:
             parentOfParent = parent.parent()
             if parentOfParent == None:
-                qDebug("parentOfParent == None")
                 return
             parentIndex = self.createIndex(parentOfParent.childIndex(parent), 0, parent)
 

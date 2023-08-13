@@ -55,3 +55,28 @@ class MainComponents(enum.IntEnum):
     ParkingBrakeSystem = 21
     ElectricitySources = 22
     ElectricityConsumers = 23
+
+class WidgetIndex(enum.IntEnum):
+    Empty = 0
+    Basics = 1
+    Details = 2
+    NumbersAndCodes = 3
+    Owner = 4
+    Engine = 5
+    PowerSystem = 6
+    CoolingSystem = 7
+    LubricationSystem = 8
+    ExhaustSystem = 9
+    Clutch = 10
+    Gearbox = 11
+    WheelDrive = 12
+    FrontSuspension = 13
+    RearSuspension = 14
+    Wheels = 15
+    Tires = 16
+    Body = 17
+    Steering = 18
+    ServiceBrakeSystem = 19
+    ParkingBrakeSystem = 20
+    ElectricitySources = 21
+    ElectricityConsumers = 22
