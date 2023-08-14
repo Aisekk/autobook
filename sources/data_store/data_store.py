@@ -1,9 +1,10 @@
 from PySide6.QtCore import qDebug
 from PySide6.QtCore import QCoreApplication
 
-import data_store.structs as structs
+import data_store.values as vals
+import data_store.enums as enums
 import data_store.const_info as const_info
-from items.classifier_item import ClassifierItem, ClassifierItemRole
+from items.classifier_item import ClassifierItem
 
 
 class AutobookDataStore(object):
@@ -14,17 +15,17 @@ class AutobookDataStore(object):
         return cls.instance
 
     def __initialize(cls):
-        cls.__carData = structs.CarData("Huyndai", "Solaris")
+        cls.__values = vals.Values("Huyndai", "Solaris")
         cls.__context = "AutobookDataStore"
 
-    def getCarData(self) -> structs.CarData:
-        return self.__carData
+    def getValues(self) -> vals.Values:
+        return self.__values
 
-    def getDefaultCarData(self) -> structs.CarData:
-        # return data_store.structs.CarData(
-        #    "Huyndai", "Solaris", "1.6L", "2012", "A123BC 152 RUS", "Sedan", "Ivanov A.S."
-        # )
-        return structs.CarData(
+    def getDefaultValues(self) -> vals.Values:
+         #return structs.Values(
+         #   "Huyndai", "Solaris", "1.6L", "2012", "A123BC 152 RUS", "Sedan", "Ivanov A.S."
+         #)
+        return vals.Values(
             str(QCoreApplication.translate(self.__context, "Brand")),
             str(QCoreApplication.translate(self.__context, "Model")),
             str(QCoreApplication.translate(self.__context, "Engine capacity, L")),
@@ -37,13 +38,13 @@ class AutobookDataStore(object):
     def getItems(self, classifier, parent: ClassifierItem) -> list[ClassifierItem]:
         items = []
         mc = const_info.main_components
-        if classifier == structs.Classifier.MainComponentsAndAssemblies:
+        if classifier == enums.Classifier.MainComponentsAndAssemblies:
             for index, name in mc.items():
-                if index < structs.MainComponents.Engine:
+                if index < enums.MainComponent.Engine:
                     item = ClassifierItem(parent, index, name)
                     if (
-                        index == structs.MainComponents.Body
-                        or index == structs.MainComponents.Steering
+                        index == enums.MainComponent.Body
+                        or index == enums.MainComponent.Steering
                     ):
                         item.isGroup = False
                     else:
@@ -58,42 +59,42 @@ class AutobookDataStore(object):
         items = []
         ids = []
         
-        if parent.id == structs.MainComponents.EngineAndItsSystems:
+        if parent.id == enums.MainComponent.EngineAndItsSystems:
             ids = [
-                structs.MainComponents.Engine,
-                structs.MainComponents.PowerSystem,
-                structs.MainComponents.CoolingSystem,
-                structs.MainComponents.LubricationSystem,
-                structs.MainComponents.ExhaustSystem,
+                enums.MainComponent.Engine,
+                enums.MainComponent.PowerSystem,
+                enums.MainComponent.CoolingSystem,
+                enums.MainComponent.LubricationSystem,
+                enums.MainComponent.ExhaustSystem,
             ]
-        elif parent.id == structs.MainComponents.TransmissionSystem:
+        elif parent.id == enums.MainComponent.TransmissionSystem:
             ids = [
-                structs.MainComponents.Clutch,
-                structs.MainComponents.Gearbox,
-                structs.MainComponents.WheelDrive,
+                enums.MainComponent.Clutch,
+                enums.MainComponent.Gearbox,
+                enums.MainComponent.WheelDrive,
             ]
-        elif parent.id == structs.MainComponents.Chassis:
+        elif parent.id == enums.MainComponent.Chassis:
             ids = [
-                structs.MainComponents.FrontSuspension,
-                structs.MainComponents.RearSuspension,
-                structs.MainComponents.Wheels,
-                structs.MainComponents.Tires,
+                enums.MainComponent.FrontSuspension,
+                enums.MainComponent.RearSuspension,
+                enums.MainComponent.Wheels,
+                enums.MainComponent.Tires,
             ]
-        elif parent.id == structs.MainComponents.Body:
+        elif parent.id == enums.MainComponent.Body:
             ids = []
-        elif parent.id == structs.MainComponents.Steering:
+        elif parent.id == enums.MainComponent.Steering:
             ids = []
-        elif parent.id == structs.MainComponents.BrakeSystem:
+        elif parent.id == enums.MainComponent.BrakeSystem:
             ids = [
-                structs.MainComponents.ServiceBrakeSystem,
-                structs.MainComponents.ParkingBrakeSystem,
+                enums.MainComponent.ServiceBrakeSystem,
+                enums.MainComponent.ParkingBrakeSystem,
             ]
-        elif parent.id == structs.MainComponents.ElectricalEquipment:
+        elif parent.id == enums.MainComponent.ElectricalEquipment:
             ids = [
-                structs.MainComponents.ElectricitySources,
-                structs.MainComponents.ElectricityConsumers,
+                enums.MainComponent.ElectricitySources,
+                enums.MainComponent.ElectricityConsumers,
             ]
-        elif parent.id == structs.MainComponents.AdditionalEquipment:
+        elif parent.id == enums.MainComponent.AdditionalEquipment:
             ids = []
 
         mc = const_info.main_components

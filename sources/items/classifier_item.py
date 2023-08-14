@@ -2,10 +2,6 @@ import enum
 import copy
 from PySide6.QtCore import Qt
 
-class ClassifierItemRole(enum.IntEnum):
-    ItemType = Qt.ItemDataRole.UserRole
-    ItemId = Qt.ItemDataRole.UserRole + 1
-
 
 class ClassifierItem(object):
     def __init__(self, parent=None, id=int(), name=str(), data=list()):

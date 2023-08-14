@@ -1,7 +1,7 @@
 from typing_extensions import override
 from PySide6.QtCore import QAbstractItemModel, QModelIndex, Qt, qDebug
-from items.classifier_item import ClassifierItem, ClassifierItemRole
-
+from items.classifier_item import ClassifierItem
+from data_store.enums import ClassifierItemRole
 
 class ClassifierModel(QAbstractItemModel):
     def __init__(self, parent=None):

@@ -13,7 +13,7 @@ from PySide6.QtWidgets import (
 )
 
 import data_store.data_store as storage
-import data_store.structs as structs
+import data_store.enums as enums
 import models.classifier_model as classifier_model
 import items.classifier_item as classifier_item
 import data_store.const_info as const_info
@@ -32,7 +32,7 @@ class ControlWidget(QWidget):
         self.__classifierView.setModel(self.__classifierModel)
 
         items = storage.AutobookDataStore().getItems(
-            structs.Classifier.MainComponentsAndAssemblies,
+            enums.Classifier.MainComponentsAndAssemblies,
             self.__classifierModel.invisibleRootItem(),
         )
         self.__classifierModel.addItems(
@@ -63,7 +63,7 @@ class ControlWidget(QWidget):
 
     def getCarLabelText(self) -> str:
         # carData = storage.AutobookDataStore().getCarData()
-        carData = storage.AutobookDataStore().getDefaultCarData()
+        carData = storage.AutobookDataStore().getDefaultValues()
         brand = self.__getCarDataTextElem__(carData.brand)
         model = self.__getCarDataTextElem__(carData.model)
         engineCap = self.__getCarDataTextElem__(carData.engineCapacity)

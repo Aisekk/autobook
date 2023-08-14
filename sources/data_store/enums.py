@@ -1,24 +1,5 @@
 import enum
-
-
-class CarData(object):
-    def __init__(
-        self,
-        brand=str(),
-        model=str(),
-        engineCap=str(),
-        manufYear=str(),
-        gosNum=str(),
-        bodyType=str(),
-        ownerDriver=str(),
-    ):
-        self.brand = brand
-        self.model = model
-        self.engineCapacity = engineCap
-        self.manufactureYear = manufYear
-        self.gosNumber = gosNum
-        self.bodyType = bodyType
-        self.ownerDriver = ownerDriver
+from PySide6.QtCore import Qt
 
 
 class Classifier(enum.IntEnum):
@@ -30,7 +11,12 @@ class Classifier(enum.IntEnum):
     Electrics = 5
 
 
-class MainComponents(enum.IntEnum):
+class ClassifierItemRole(enum.IntEnum):
+    ItemType = Qt.ItemDataRole.UserRole
+    ItemId = Qt.ItemDataRole.UserRole + 1
+
+
+class MainComponent(enum.IntEnum):
     EngineAndItsSystems = 0
     TransmissionSystem = 1
     Chassis = 2
@@ -55,6 +41,7 @@ class MainComponents(enum.IntEnum):
     ParkingBrakeSystem = 21
     ElectricitySources = 22
     ElectricityConsumers = 23
+
 
 class WidgetIndex(enum.IntEnum):
     Empty = 0
