@@ -3,20 +3,25 @@ import data_store.params as params
 
 class ILoader(object):
     def __init__(self) -> None:
-        super.__init__()
-        self.engineParams: params.EngineParams()
-
-    def loadValues(self):
-        "Load values: car data"
+        "ILoader"
+        #self.engineParams: params.EngineParams()
     
-    def loadParams(self):
-        "Load car parameters"
-        self.engineParams = self.loadEngineParams()
+    def getParams():
+        "Return car values"
 
-    #def loadComponentParams(self, component: structs.MainComponents):
-    #    "Load component parameters"
-    #    if component == structs.MainComponents.Engine:
-    #        self.loadEngineParams()
+    def getValues():
+        "Return car values"
+    
+    def loadValues(self) -> bool:
+        "Load car values from data source"
+        return False
+    
+    def loadParams(self) -> bool:
+        "Load car parameters from data source"
+        #self.engineParams = 
+        self.loadEngineParams()
+        return False
 
-    def loadEngineParams(self):
+    def loadEngineParams(self) -> bool:
         "Load engine parameters"
+        return False

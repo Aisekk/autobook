@@ -1,10 +1,11 @@
 from PySide6.QtCore import qDebug
-from PySide6.QtCore import QCoreApplication
+from PySide6.QtCore import QCoreApplication, QDir
 
 import data_store.values as vals
 import data_store.enums as enums
 import data_store.const_info as const_info
 from items.classifier_item import ClassifierItem
+import loaders.json_loader
 
 
 class AutobookDataStore(object):
@@ -18,13 +19,17 @@ class AutobookDataStore(object):
         cls.__values = vals.Values("Huyndai", "Solaris")
         cls.__context = "AutobookDataStore"
 
+        cls.__mainPath = QDir.currentPath()
+        cls.__loader = loaders.json_loader.JsonLoader(cls.__mainPath)
+        cls.__loader.loadParams()
+
     def getValues(self) -> vals.Values:
         return self.__values
 
     def getDefaultValues(self) -> vals.Values:
-         #return structs.Values(
-         #   "Huyndai", "Solaris", "1.6L", "2012", "A123BC 152 RUS", "Sedan", "Ivanov A.S."
-         #)
+        # return structs.Values(
+        #   "Huyndai", "Solaris", "1.6L", "2012", "A123BC 152 RUS", "Sedan", "Ivanov A.S."
+        # )
         return vals.Values(
             str(QCoreApplication.translate(self.__context, "Brand")),
             str(QCoreApplication.translate(self.__context, "Model")),
@@ -58,7 +63,7 @@ class AutobookDataStore(object):
     def __getMainComponentsItems(self, parent: ClassifierItem):
         items = []
         ids = []
-        
+
         if parent.id == enums.MainComponent.EngineAndItsSystems:
             ids = [
                 enums.MainComponent.Engine,
