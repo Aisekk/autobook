@@ -1,13 +1,12 @@
 from typing_extensions import override
 from loaders.iloader import ILoader
+from data_store.params import EngineParams
 
 from PySide6.QtCore import (
     QCoreApplication,
     QIODevice,
     QFile,
     QJsonDocument,
-    QJsonArray,
-    QJsonValue,
     qDebug,
 )
 
@@ -16,6 +15,7 @@ class JsonLoader(ILoader):
     def __init__(self, path: str) -> None:
         super().__init__()
         self.__mainPath = path
+        self.__engineParams = EngineParams()
 
     @override
     def loadEngineParams(self) -> bool:
@@ -34,14 +34,61 @@ class JsonLoader(ILoader):
             return False
         if doc.isObject():
             jsonEngineObject = doc.object()
-            if jsonEngineObject.__contains__("FuelCombustionTypes"):
-                jsonEngineValue = jsonEngineObject.get("FuelCombustionTypes")
-                print(jsonEngineValue)
-                qDebug("read")
-                #for val in jsonEngineValue:
-                 #   qDebug(val.get("id"))
-                #if jsonEngineValue.isArray():
-                 #   qDebug("read")
-
+            self.__readParams(
+                jsonEngineObject,
+                "FuelCombustionType",
+                self.__engineParams.fuelCombustionTypes,
+            )
+            self.__readParams(
+                jsonEngineObject, "DesignType", self.__engineParams.designTypes
+            )
+            self.__readParams(
+                jsonEngineObject,
+                "CylinderArrangement",
+                self.__engineParams.cylinderArrangements,
+            )
+            self.__readParams(
+                jsonEngineObject,
+                "CylindersNumber",
+                self.__engineParams.cylindersNumbers,
+            )
+            self.__readParams(
+                jsonEngineObject, "FuelType", self.__engineParams.fuelTypes
+            )
+            self.__readParams(jsonEngineObject, "Tact", self.__engineParams.tactValues)
+            self.__readParams(
+                jsonEngineObject,
+                "CombustibleMixtureFormation",
+                self.__engineParams.combustibleMixtureFormations,
+            )
+            self.__readParams(
+                jsonEngineObject, "CoolingSystem", self.__engineParams.coolingSystems
+            )
+            self.__readParams(
+                jsonEngineObject, "GdmDriveDesign", self.__engineParams.gdmDriveDesigns
+            )
+            self.__readParams(
+                jsonEngineObject, "Location", self.__engineParams.locations
+            )
+            self.__readParams(
+                jsonEngineObject, "AirPressure", self.__engineParams.airPressureValues
+            )
+        self.params.engineParams = self.__engineParams
         file.close()
-        return True
+
+    def __readParams(self, jsonEngineObject, key, params):
+        if jsonEngineObject.__contains__(key):
+            source: list = jsonEngineObject.get(key)
+            # print(source)
+            params = self.__fillParams(source)
+            print(params)
+
+    def __fillParams(self, source: list) -> dict:
+        params = {}
+        for item in source:
+            params[item.get("id")] = item.get("name")
+        return params
+
+    def __output(self, params):
+        for key, val in params.items():
+            qDebug(str(key) + ": " + val)

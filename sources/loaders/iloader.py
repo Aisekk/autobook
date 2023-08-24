@@ -1,25 +1,29 @@
-import data_store.values as vals
-import data_store.params as params
+from data_store.values import Values
+from data_store.params import Params
 
 class ILoader(object):
     def __init__(self) -> None:
         "ILoader"
-        #self.engineParams: params.EngineParams()
+        # self.__engineParams = EngineParams()
+        self.params = Params()
+        self.__values = Values()
     
-    def getParams():
-        "Return car values"
+    def getParams(self):
+        "Return car params"
+        return self.params
 
-    def getValues():
+    def getValues(self):
         "Return car values"
+        return self.__values
     
     def loadValues(self) -> bool:
         "Load car values from data source"
         return False
     
     def loadParams(self) -> bool:
-        "Load car parameters from data source"
-        #self.engineParams = 
-        self.loadEngineParams()
+        "Load car parameters from data source" 
+        if self.loadEngineParams():
+            return True
         return False
 
     def loadEngineParams(self) -> bool:

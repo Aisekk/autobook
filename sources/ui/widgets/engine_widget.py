@@ -9,6 +9,9 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import QDoubleValidator
 
+import data_store.data_store as storage
+import data_store.params
+
 
 class EngineWidget(QWidget):
     def __init__(self, parent=None):
@@ -84,6 +87,8 @@ class EngineWidget(QWidget):
 
         self.setLayout(vbxLayout)
 
+        self.__fillComboBox()
+
     def __createComboBox(self, parent=None) -> QComboBox:
         comboBox = QComboBox(parent)
         return comboBox
@@ -96,3 +101,11 @@ class EngineWidget(QWidget):
         hbxLayout.addStretch(30)
         widget.setLayout(hbxLayout)
         return widget
+
+    def __fillComboBox(self):
+        params = storage.AutobookDataStore().getParams()
+        engine = params.engineParams
+        for key_id, value in engine.fuelCombustionTypes:
+            self.__cbxFuelCombustionTypes.addItem(value, key_id)
+        #self.__cbxFuelCombustionTypes.addItems(["1", "2"])
+        #self.__cbxFuelCombustionTypes.addItems(engine.fuelCombustionTypes.values())

@@ -1,5 +1,5 @@
 {
-  "FuelCombustionTypes": [
+  "FuelCombustionType": [
     {
       "id": 0,
       "name": "Двигатель внутреннего сгорания"
@@ -13,7 +13,7 @@
       "name": "Электрический двигатель"
     }
   ],
-  "DesignTypes": [
+  "DesignType": [
     {
       "id": 0,
       "name": "Поршневой"
@@ -56,43 +56,43 @@
   "CylindersNumber": [
     {
       "id": 0,
-      "number": "2"
+      "name": "2"
     },
     {
       "id": 1,
-      "number": "4"
+      "name": "4"
     },
     {
       "id": 2,
-      "number": "6"
+      "name": "6"
     },
     {
       "id": 3,
-      "number": "8"
+      "name": "8"
     },
     {
       "id": 4,
-      "number": "10"
+      "name": "10"
     },
     {
       "id": 5,
-      "number": "12"
+      "name": "12"
     },
     {
       "id": 6,
-      "number": "14"
+      "name": "14"
     },
     {
       "id": 7,
-      "number": "16"
+      "name": "16"
     },
     {
       "id": 8,
-      "number": "18"
+      "name": "18"
     },
     {
       "id": 9,
-      "number": "20"
+      "name": "20"
     }
   ],
   "FuelType": [

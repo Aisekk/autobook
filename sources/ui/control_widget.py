@@ -76,7 +76,6 @@ class ControlWidget(QWidget):
 
     def __getCarDataTextElem__(self, elem: str) -> str:
         return str("<STRONG><CENTER>" + str(elem) + "</STRONG>")
-        # return str("<H4><CENTER><FONT COLOR=GREEN>" + str(elem) + "</H4>")
 
     def __createButtons(self, parent=None) -> QWidget:
         buttonsWidget = QWidget(parent)
