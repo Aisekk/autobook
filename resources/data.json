@@ -11,7 +11,17 @@
   "Engine": {
     "Capacity": "1.6",
     "ManufCountry": "Южная Корея",
-    "Type": 0
+    "FuelCombustionTypeId": 0,
+    "DesignTypeId": 0,
+    "CylinderArrangementId": 0,
+    "CylindersNumberId": 1,
+    "FuelTypeId": 0,
+    "TactId": 1,
+    "CombustibleMixtureFormationId": 0,
+    "CoolingSystemId": 2,
+    "GdmDriveDesign": 0,
+    "Location": 1,
+    "AirPressure": 0
   },
   "Body": {
     "Color": "серый"

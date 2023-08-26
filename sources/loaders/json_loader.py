@@ -65,7 +65,7 @@ class JsonLoader(ILoader):
             self.__engineParams.airPressureValues = self.__readParams(
                 jsonEngineObject, "AirPressure"
             )
-        self.params.engineParams = self.__engineParams
+        self._params.engineParams = self.__engineParams
         # qDebug("len fct = " + str(len(self.params.engineParams.fuelCombustionTypes)))
         file.close()
         return True

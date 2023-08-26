@@ -20,5 +20,17 @@ class Values(object):
 
 
 class Engine(object):
-    def __init__(self, capacity=str()):
+    def __init__(self, capacity=str(), manufCountry = str()):
         self.capacity = capacity
+        self.manufCountry = manufCountry
+        self.fuelCombustionTypeId = int(-1)
+        self.designTypeId = int(-1)
+        self.cylinderArrangementId = int(-1)
+        self.cylindersNumberId = int(-1)
+        self.fuelTypeId = int(-1)
+        self.tactId = int(-1)
+        self.combustibleMixtureFormationId = int(-1)
+        self.coolingSystemId = int(-1)
+        self.gdmDriveDesignId = int(-1)
+        self.locationId = int(-1)
+        self.airPressureId = int(-1)

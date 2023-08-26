@@ -5,16 +5,16 @@ from PySide6.QtCore import qDebug
 class ILoader(object):
     def __init__(self) -> None:
         "ILoader"
-        self.params = Params()
-        self.__values = Values()
+        self._params = Params()
+        self._values = Values()
     
     def getParams(self) -> Params:
         "Return car params"
-        return self.params
+        return self._params
 
     def getValues(self) -> Values:
         "Return car values"
-        return self.__values
+        return self._values
     
     def loadValues(self) -> bool:
         "Load car values from data source"

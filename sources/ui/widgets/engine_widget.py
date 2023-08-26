@@ -22,6 +22,8 @@ class EngineWidget(QWidget):
         validator = QDoubleValidator(0.0, 1.0e10, 10, self.__leCapacity)
         self.__leCapacity.setValidator(validator)
 
+        self.__leManufCountry = QLineEdit()
+
         self.__cbxFuelCombustionType = self.__createComboBox()
         self.__cbxDesignType = self.__createComboBox()
         self.__cbxCylinderArrangement = self.__createComboBox()
@@ -37,6 +39,10 @@ class EngineWidget(QWidget):
         capacityWidget = self.__createParamWidget(
             self, self.tr("Engine capacity, l"), self.__leCapacity
         )
+        manufCountryWidget = self.__createParamWidget(
+            self, self.tr("Manufacturing country"), self.__leManufCountry
+        )
+
         fuelCombustionTypesWidget = self.__createParamWidget(
             self, self.tr("Fuel combustion type"), self.__cbxFuelCombustionType
         )
@@ -73,6 +79,7 @@ class EngineWidget(QWidget):
 
         vbxLayout = QVBoxLayout()
         vbxLayout.addWidget(capacityWidget, 1)
+        vbxLayout.addWidget(manufCountryWidget, 1)
         vbxLayout.addWidget(fuelCombustionTypesWidget, 1)
         vbxLayout.addWidget(designTypesWidget, 1)
         vbxLayout.addWidget(cylinderArrangementWidget, 1)
@@ -126,9 +133,7 @@ class EngineWidget(QWidget):
         self.__fillComboBox(
             self.__cbxGdmDriveDesign, params.engineParams.gdmDriveDesigns
         )
-        self.__fillComboBox(
-            self.__cbxLocation, params.engineParams.locations
-        )
+        self.__fillComboBox(self.__cbxLocation, params.engineParams.locations)
         self.__fillComboBox(
             self.__cbxAirPressure, params.engineParams.airPressureValues
         )
