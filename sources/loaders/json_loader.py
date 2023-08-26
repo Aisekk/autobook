@@ -34,54 +34,46 @@ class JsonLoader(ILoader):
             return False
         if doc.isObject():
             jsonEngineObject = doc.object()
-            self.__readParams(
-                jsonEngineObject,
-                "FuelCombustionType",
-                self.__engineParams.fuelCombustionTypes,
+            self.__engineParams.fuelCombustionTypes = self.__readParams(
+                jsonEngineObject, "FuelCombustionType"
             )
-            self.__readParams(
-                jsonEngineObject, "DesignType", self.__engineParams.designTypes
+            self.__engineParams.designTypes = self.__readParams(
+                jsonEngineObject, "DesignType"
             )
-            self.__readParams(
-                jsonEngineObject,
-                "CylinderArrangement",
-                self.__engineParams.cylinderArrangements,
+            self.__engineParams.cylinderArrangements = self.__readParams(
+                jsonEngineObject, "CylinderArrangement"
             )
-            self.__readParams(
-                jsonEngineObject,
-                "CylindersNumber",
-                self.__engineParams.cylindersNumbers,
+            self.__engineParams.cylindersNumbers = self.__readParams(
+                jsonEngineObject, "CylindersNumber"
             )
-            self.__readParams(
-                jsonEngineObject, "FuelType", self.__engineParams.fuelTypes
+            self.__engineParams.fuelTypes = self.__readParams(
+                jsonEngineObject, "FuelType"
             )
-            self.__readParams(jsonEngineObject, "Tact", self.__engineParams.tactValues)
-            self.__readParams(
-                jsonEngineObject,
-                "CombustibleMixtureFormation",
-                self.__engineParams.combustibleMixtureFormations,
+            self.__engineParams.tactValues = self.__readParams(jsonEngineObject, "Tact")
+            self.__engineParams.combustibleMixtureFormations = self.__readParams(
+                jsonEngineObject, "CombustibleMixtureFormation"
             )
-            self.__readParams(
-                jsonEngineObject, "CoolingSystem", self.__engineParams.coolingSystems
+            self.__engineParams.coolingSystems = self.__readParams(
+                jsonEngineObject, "CoolingSystem"
             )
-            self.__readParams(
-                jsonEngineObject, "GdmDriveDesign", self.__engineParams.gdmDriveDesigns
+            self.__engineParams.gdmDriveDesigns = self.__readParams(
+                jsonEngineObject, "GdmDriveDesign"
             )
-            self.__readParams(
-                jsonEngineObject, "Location", self.__engineParams.locations
+            self.__engineParams.locations = self.__readParams(
+                jsonEngineObject, "Location"
             )
-            self.__readParams(
-                jsonEngineObject, "AirPressure", self.__engineParams.airPressureValues
+            self.__engineParams.airPressureValues = self.__readParams(
+                jsonEngineObject, "AirPressure"
             )
         self.params.engineParams = self.__engineParams
+        # qDebug("len fct = " + str(len(self.params.engineParams.fuelCombustionTypes)))
         file.close()
+        return True
 
-    def __readParams(self, jsonEngineObject, key, params):
+    def __readParams(self, jsonEngineObject, key):
         if jsonEngineObject.__contains__(key):
             source: list = jsonEngineObject.get(key)
-            # print(source)
-            params = self.__fillParams(source)
-            print(params)
+            return self.__fillParams(source)
 
     def __fillParams(self, source: list) -> dict:
         params = {}

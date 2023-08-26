@@ -19,11 +19,13 @@ class AutobookDataStore(object):
     def __initialize(cls):
         cls.__values = Values("Huyndai", "Solaris")
         cls.__context = "AutobookDataStore"
-
         cls.__mainPath = QDir.currentPath()
         cls.__loader = loaders.json_loader.JsonLoader(cls.__mainPath)
-        cls.__loader.loadParams()
-        # p = cls.__loader.__engineParams
+        
+    def loadData(self) -> bool:
+        if self.__loader.loadParams():
+            return True
+        return False
 
     def getParams(self) -> Params:
         return self.__loader.getParams()

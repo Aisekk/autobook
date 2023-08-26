@@ -8,6 +8,7 @@ from PySide6.QtWidgets import (
     QPushButton,
 )
 from PySide6.QtGui import QDoubleValidator
+from PySide6.QtCore import qDebug
 
 import data_store.data_store as storage
 import data_store.params
@@ -21,8 +22,8 @@ class EngineWidget(QWidget):
         validator = QDoubleValidator(0.0, 1.0e10, 10, self.__leCapacity)
         self.__leCapacity.setValidator(validator)
 
-        self.__cbxFuelCombustionTypes = self.__createComboBox()
-        self.__cbxDesignTypes = self.__createComboBox()
+        self.__cbxFuelCombustionType = self.__createComboBox()
+        self.__cbxDesignType = self.__createComboBox()
         self.__cbxCylinderArrangement = self.__createComboBox()
         self.__cbxCylindersNumber = self.__createComboBox()
         self.__cbxFuelType = self.__createComboBox()
@@ -37,10 +38,10 @@ class EngineWidget(QWidget):
             self, self.tr("Engine capacity, l"), self.__leCapacity
         )
         fuelCombustionTypesWidget = self.__createParamWidget(
-            self, self.tr("Fuel combustion type"), self.__cbxFuelCombustionTypes
+            self, self.tr("Fuel combustion type"), self.__cbxFuelCombustionType
         )
         designTypesWidget = self.__createParamWidget(
-            self, self.tr("Design type"), self.__cbxDesignTypes
+            self, self.tr("Design type"), self.__cbxDesignType
         )
         cylinderArrangementWidget = self.__createParamWidget(
             self, self.tr("Cylinder arrangement"), self.__cbxCylinderArrangement
@@ -87,7 +88,8 @@ class EngineWidget(QWidget):
 
         self.setLayout(vbxLayout)
 
-        self.__fillComboBox()
+    def loadData(self):
+        self.__fillParams()
 
     def __createComboBox(self, parent=None) -> QComboBox:
         comboBox = QComboBox(parent)
@@ -102,10 +104,35 @@ class EngineWidget(QWidget):
         widget.setLayout(hbxLayout)
         return widget
 
-    def __fillComboBox(self):
+    def __fillParams(self):
         params = storage.AutobookDataStore().getParams()
-        engine = params.engineParams
-        for key_id, value in engine.fuelCombustionTypes:
-            self.__cbxFuelCombustionTypes.addItem(value, key_id)
-        #self.__cbxFuelCombustionTypes.addItems(["1", "2"])
-        #self.__cbxFuelCombustionTypes.addItems(engine.fuelCombustionTypes.values())
+        self.__fillComboBox(
+            self.__cbxFuelCombustionType, params.engineParams.fuelCombustionTypes
+        )
+        self.__fillComboBox(self.__cbxDesignType, params.engineParams.designTypes)
+        self.__fillComboBox(
+            self.__cbxCylinderArrangement, params.engineParams.cylinderArrangements
+        )
+        self.__fillComboBox(
+            self.__cbxCylindersNumber, params.engineParams.cylindersNumbers
+        )
+        self.__fillComboBox(self.__cbxFuelType, params.engineParams.fuelTypes)
+        self.__fillComboBox(self.__cbxTact, params.engineParams.tactValues)
+        self.__fillComboBox(
+            self.__cbxCombustibleMixtureFormation,
+            params.engineParams.combustibleMixtureFormations,
+        )
+        self.__fillComboBox(self.__cbxCoolingSystem, params.engineParams.coolingSystems)
+        self.__fillComboBox(
+            self.__cbxGdmDriveDesign, params.engineParams.gdmDriveDesigns
+        )
+        self.__fillComboBox(
+            self.__cbxLocation, params.engineParams.locations
+        )
+        self.__fillComboBox(
+            self.__cbxAirPressure, params.engineParams.airPressureValues
+        )
+
+    def __fillComboBox(self, comboBox, params):
+        for param_id, value in params.items():
+            comboBox.addItem(value, param_id)

@@ -1,18 +1,18 @@
 from data_store.values import Values
 from data_store.params import Params
+from PySide6.QtCore import qDebug
 
 class ILoader(object):
     def __init__(self) -> None:
         "ILoader"
-        # self.__engineParams = EngineParams()
         self.params = Params()
         self.__values = Values()
     
-    def getParams(self):
+    def getParams(self) -> Params:
         "Return car params"
         return self.params
 
-    def getValues(self):
+    def getValues(self) -> Values:
         "Return car values"
         return self.__values
     

@@ -1,7 +1,7 @@
 from ast import Add
 from client import lib
 
-# from PySide6.QtCore import Qt, QCoreApplication
+from PySide6.QtCore import qDebug
 from PySide6.QtWidgets import (
     QMainWindow,
     QWidget,
@@ -36,6 +36,8 @@ class MainWindow(QMainWindow):
         # button = QPushButton("From Go: backend.Add(10,99) = %d" % lib.Add(10,99))
         # self.setCentralWidget(button)
 
+        self.__loadData()
+
     def __connectObjects(self) -> None:
         self.__ui.addCarAction.triggered.connect(lambda: self.__ui.carAdditionDialog.show())
         self.__ui.projectAction.triggered.connect(
@@ -49,3 +51,7 @@ class MainWindow(QMainWindow):
                 # QCoreApplication.translate("MainWindow", "Autobook v0.0.0.0\nCopyright (c) 2023 Aleksandr Chekmarev")
             )
         )
+
+    def __loadData(self):
+        if storage.AutobookDataStore().loadData():
+            self.__ui.engineWidget.loadData()
