@@ -66,12 +66,12 @@
 			<translation>Автомобиль</translation>
 		</message>
 		<message>
-			<source>Basics</source>
-			<translation>Основное</translation>
+			<source>Records</source>
+			<translation>Записи</translation>
 		</message>
 		<message>
-			<source>Details</source>
-			<translation>Подробности</translation>
+			<source>Parameters</source>
+			<translation>Параметры</translation>
 		</message>
 		<message>
 			<source>Numbers and codes</source>
@@ -115,6 +115,10 @@
 		<message>
 			<source>Engine capacity, l</source>
 			<translation>Объем двигателя, л</translation>
+		</message>
+		<message>
+			<source>Manufacturing country</source>
+			<translation>Страна-производитель</translation>
 		</message>
 		<message>
 			<source>Fuel combustion type</source>

@@ -1,4 +1,5 @@
-from PySide6.QtCore import Qt, qDebug
+import signal
+from PySide6.QtCore import Signal, QModelIndex, Qt, qDebug
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
     QWidget,
@@ -38,7 +39,6 @@ class ControlWidget(QWidget):
         self.__classifierModel.addItems(
             self.__classifierModel.invisibleRootItem(), items
         )
-        # self.__classifierModel.addItems(items[0], [child])
 
         vbxMainLayout = QVBoxLayout()
         vbxMainLayout.addWidget(self.__carDataDisplayWidget, 10)
@@ -48,6 +48,17 @@ class ControlWidget(QWidget):
         vbxMainLayout.addWidget(self.__classifierView, 50)
         vbxMainLayout.addStretch(1)
         self.setLayout(vbxMainLayout)
+
+        self.__connectObjects()
+
+    treeItemClicked = Signal(enums.MainComponent)
+
+    def __connectObjects(self) -> None:
+        self.__classifierView.clicked.connect(
+            lambda modelIndex: self.treeItemClicked.emit(
+                modelIndex.data(enums.ClassifierItemRole.ItemId)
+            )
+        )
 
     def __createCarDataDisplayWidget(self, parent=None) -> QGroupBox:
         carGroupBox = QGroupBox(parent)
@@ -64,23 +75,23 @@ class ControlWidget(QWidget):
     def getCarLabelText(self) -> str:
         # carData = storage.AutobookDataStore().getCarData()
         carData = storage.AutobookDataStore().getDefaultValues()
-        brand = self.__getCarDataTextElem__(carData.brand)
-        model = self.__getCarDataTextElem__(carData.model)
-        engineCap = self.__getCarDataTextElem__(carData.engineCapacity)
-        manufYear = self.__getCarDataTextElem__(carData.manufactureYear)
-        gosNum = self.__getCarDataTextElem__(carData.gosNumber)
-        bodyType = self.__getCarDataTextElem__(carData.bodyType)
-        ownerDriver = self.__getCarDataTextElem__(carData.ownerDriver)
+        brand = self.__getCarDataTextElem(carData.brand)
+        model = self.__getCarDataTextElem(carData.model)
+        engineCap = self.__getCarDataTextElem(carData.engineCapacity)
+        manufYear = self.__getCarDataTextElem(carData.manufactureYear)
+        gosNum = self.__getCarDataTextElem(carData.gosNumber)
+        bodyType = self.__getCarDataTextElem(carData.bodyType)
+        ownerDriver = self.__getCarDataTextElem(carData.ownerDriver)
         text = brand + model + engineCap + manufYear + gosNum + bodyType + ownerDriver
         return text
 
-    def __getCarDataTextElem__(self, elem: str) -> str:
+    def __getCarDataTextElem(self, elem: str) -> str:
         return str("<STRONG><CENTER>" + str(elem) + "</STRONG>")
 
     def __createButtons(self, parent=None) -> QWidget:
         buttonsWidget = QWidget(parent)
-        self.__basicsButton = QPushButton(self.tr("Basics"), buttonsWidget)
-        self.__detailsButton = QPushButton(self.tr("Details"), buttonsWidget)
+        self.__basicsButton = QPushButton(self.tr("Records"), buttonsWidget)
+        self.__detailsButton = QPushButton(self.tr("Parameters"), buttonsWidget)
         self.__numbersAndCodesButton = QPushButton(
             self.tr("Numbers and codes"), buttonsWidget
         )

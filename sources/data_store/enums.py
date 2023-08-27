@@ -45,11 +45,11 @@ class MainComponent(enum.IntEnum):
 
 class WidgetIndex(enum.IntEnum):
     Empty = 0
-    Basics = 1
-    Details = 2
-    NumbersAndCodes = 3
-    Owner = 4
-    Engine = 5
+    # Records = 1
+    # Parameters = 2
+    # NumbersAndCodes = 3
+    # Owner = 4
+    Engine = 1
     PowerSystem = 6
     CoolingSystem = 7
     LubricationSystem = 8
