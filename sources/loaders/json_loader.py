@@ -7,8 +7,11 @@ from PySide6.QtCore import (
     QIODevice,
     QFile,
     QJsonDocument,
+    QJsonValue,
     qDebug,
 )
+
+from sources.data_store.values import BasicValues
 
 
 class JsonLoader(ILoader):
@@ -70,7 +73,7 @@ class JsonLoader(ILoader):
         file.close()
         return True
 
-    def __readParams(self, jsonEngineObject, key):
+    def __readParams(self, jsonEngineObject, key) -> dict:
         if jsonEngineObject.__contains__(key):
             source: list = jsonEngineObject.get(key)
             return self.__fillParams(source)
@@ -84,3 +87,39 @@ class JsonLoader(ILoader):
     def __output(self, params):
         for key, val in params.items():
             qDebug(str(key) + ": " + val)
+
+    @override
+    def loadEngineValues(self) -> bool:
+        filePath = self.__mainPath + "/resources/car.json"
+        qDebug(filePath)
+        if not QFile.exists(filePath):
+            return False
+        file = QFile(filePath)
+        if not file.open(QIODevice.ReadOnly):
+            return False
+        data = file.readAll()
+        if data.isEmpty():
+            return False
+        doc = QJsonDocument.fromJson(data)
+        if doc.isEmpty():
+            return False
+        if doc.isObject():
+            jsonMainObject = doc.object()
+            self._values.basicValues = self.__readBasicValues(jsonMainObject, "Basics")
+        file.close()
+        return True
+
+    def __readBasicValues(self, jsonValsObject, key):
+        if jsonValsObject.__contains__(key):
+            source: dict = jsonValsObject.get(key)
+            basicValues = BasicValues(
+                source.get("Brand"),
+                source.get("Model"),
+                "1.6",
+                source.get("ManufYear"),
+                source.get("GosNumber"),
+                source.get("BodyType"),
+                source.get("Owner"),
+                source.get("ManufWarranty"),
+            )
+            return basicValues

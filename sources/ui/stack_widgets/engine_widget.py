@@ -141,3 +141,4 @@ class EngineWidget(QWidget):
     def __fillComboBox(self, comboBox, params):
         for param_id, value in params.items():
             comboBox.addItem(value, param_id)
+

@@ -9,7 +9,6 @@ classifiers = {
     enums.Classifier.Electrics: "Electrics",
 }
 
-
 main_components = {
     enums.MainComponent.EngineAndItsSystems: "Engine and its systems",
     enums.MainComponent.TransmissionSystem: "Transmission system",
@@ -35,4 +34,31 @@ main_components = {
     enums.MainComponent.ParkingBrakeSystem: "Parking brake system",
     enums.MainComponent.ElectricitySources: "Electricity sources",
     enums.MainComponent.ElectricityConsumers: "Electricity consumers",
+}
+
+widget_indexes = {
+    enums.MainComponent.EngineAndItsSystems: enums.WidgetIndex.Empty,
+    enums.MainComponent.TransmissionSystem: enums.WidgetIndex.Empty,
+    enums.MainComponent.Chassis: enums.WidgetIndex.Empty,
+    enums.MainComponent.Body: enums.WidgetIndex.Body,
+    enums.MainComponent.Steering: enums.WidgetIndex.Steering,
+    enums.MainComponent.BrakeSystem: enums.WidgetIndex.Empty,
+    enums.MainComponent.ElectricalEquipment: enums.WidgetIndex.Empty,
+    enums.MainComponent.AdditionalEquipment: enums.WidgetIndex.Empty,
+    enums.MainComponent.Engine: enums.WidgetIndex.Engine,
+    enums.MainComponent.PowerSystem: enums.WidgetIndex.PowerSystem,
+    enums.MainComponent.CoolingSystem: enums.WidgetIndex.CoolingSystem,
+    enums.MainComponent.LubricationSystem: enums.WidgetIndex.LubricationSystem,
+    enums.MainComponent.ExhaustSystem: enums.WidgetIndex.ExhaustSystem,
+    enums.MainComponent.Clutch: enums.WidgetIndex.Clutch,
+    enums.MainComponent.Gearbox: enums.WidgetIndex.Gearbox,
+    enums.MainComponent.WheelDrive: enums.WidgetIndex.WheelDrive,
+    enums.MainComponent.FrontSuspension: enums.WidgetIndex.FrontSuspension,
+    enums.MainComponent.RearSuspension: enums.WidgetIndex.RearSuspension,
+    enums.MainComponent.Wheels: enums.WidgetIndex.Wheels,
+    enums.MainComponent.Tires: enums.WidgetIndex.Tires,
+    enums.MainComponent.ServiceBrakeSystem: enums.WidgetIndex.ServiceBrakeSystem,
+    enums.MainComponent.ParkingBrakeSystem: enums.WidgetIndex.ParkingBrakeSystem,
+    enums.MainComponent.ElectricitySources: enums.WidgetIndex.ElectricitySources,
+    enums.MainComponent.ElectricityConsumers: enums.WidgetIndex.ElectricityConsumers,
 }

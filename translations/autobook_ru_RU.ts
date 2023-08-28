@@ -62,6 +62,10 @@
 	<context>
 		<name>ControlWidget</name>
 		<message>
+			<source>Warranty</source>
+			<translation>Гарантия</translation>
+		</message>
+		<message>
 			<source>Car</source>
 			<translation>Автомобиль</translation>
 		</message>

@@ -8,7 +8,7 @@ from PySide6.QtGui import QAction, QIcon
 import ui.control_widget
 import ui.car_addition_dialog
 import ui.project_settings_dialog
-import ui.widgets.engine_widget
+import ui.stack_widgets.engine_widget
 
 
 class StructUi(object):
@@ -21,7 +21,7 @@ class StructUi(object):
 
         self.stackedWidget = QStackedWidget()
         self.emptyWidget = QWidget()
-        self.engineWidget = ui.widgets.engine_widget.EngineWidget()
+        self.engineWidget = ui.stack_widgets.engine_widget.EngineWidget()
 
         self.stackedWidget.addWidget(self.emptyWidget)
         self.stackedWidget.addWidget(self.engineWidget)

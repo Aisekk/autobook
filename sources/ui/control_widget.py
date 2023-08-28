@@ -1,4 +1,5 @@
 import signal
+#from PySide6.QtGui import QString
 from PySide6.QtCore import Signal, QModelIndex, Qt, qDebug
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
@@ -18,9 +19,12 @@ import data_store.enums as enums
 import models.classifier_model as classifier_model
 import items.classifier_item as classifier_item
 import data_store.const_info as const_info
+from sources.data_store.values import BasicValues
 
 
 class ControlWidget(QWidget):
+    treeItemClicked = Signal(enums.MainComponent)
+
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
         self.__carDataDisplayWidget = self.__createCarDataDisplayWidget(self)
@@ -51,7 +55,10 @@ class ControlWidget(QWidget):
 
         self.__connectObjects()
 
-    treeItemClicked = Signal(enums.MainComponent)
+    def loadData(self):
+        basicValues = storage.AutobookDataStore().getValues().basicValues
+        text = self.getCarLabelText(basicValues)
+        self.__carLabel.setText(text)
 
     def __connectObjects(self) -> None:
         self.__classifierView.clicked.connect(
@@ -62,27 +69,32 @@ class ControlWidget(QWidget):
 
     def __createCarDataDisplayWidget(self, parent=None) -> QGroupBox:
         carGroupBox = QGroupBox(parent)
-        # font = QFont("Arial", 10)
-        # font.setBold(True)
-        # carGroupBox.setFont(font)
-        # carGroupBox.setAlignment(Qt.AlignmentFlag.AlignHCenter)
-        self.__carLabel = QLabel(self.getCarLabelText())
+        basicValues = storage.AutobookDataStore().getDefaultValues()
+        self.__carLabel = QLabel(self.getCarLabelText(basicValues))
         vbxLayout = QVBoxLayout()
         vbxLayout.addWidget(self.__carLabel)
         carGroupBox.setLayout(vbxLayout)
         return carGroupBox
 
-    def getCarLabelText(self) -> str:
-        # carData = storage.AutobookDataStore().getCarData()
-        carData = storage.AutobookDataStore().getDefaultValues()
-        brand = self.__getCarDataTextElem(carData.brand)
-        model = self.__getCarDataTextElem(carData.model)
-        engineCap = self.__getCarDataTextElem(carData.engineCapacity)
-        manufYear = self.__getCarDataTextElem(carData.manufactureYear)
-        gosNum = self.__getCarDataTextElem(carData.gosNumber)
-        bodyType = self.__getCarDataTextElem(carData.bodyType)
-        ownerDriver = self.__getCarDataTextElem(carData.ownerDriver)
-        text = brand + model + engineCap + manufYear + gosNum + bodyType + ownerDriver
+    def getCarLabelText(self, basicValues: BasicValues) -> str:
+        brand = self.__getCarDataTextElem(basicValues.brand)
+        model = self.__getCarDataTextElem(basicValues.model)
+        engineCap = self.__getCarDataTextElem(basicValues.engineCapacity)
+        manufYear = self.__getCarDataTextElem(basicValues.manufactureYear)
+        gosNum = self.__getCarDataTextElem(basicValues.gosNumber)
+        bodyType = self.__getCarDataTextElem(basicValues.bodyType)
+        ownerDriver = self.__getCarDataTextElem(basicValues.ownerDriver)
+        manufWarranty = self.__getCarDataTextElem(self.tr("Warranty") + " " + basicValues.manufWarranty)
+        text = (
+            brand
+            + model
+            + engineCap
+            + manufYear
+            + gosNum
+            + bodyType
+            + ownerDriver
+            + manufWarranty
+        )
         return text
 
     def __getCarDataTextElem(self, elem: str) -> str:

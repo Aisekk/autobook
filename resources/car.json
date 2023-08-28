@@ -3,25 +3,25 @@
     "Brand": "Hyundai",
     "Model": "Solaris",
     "ManufYear": 2012,
-    "GosNumber": "A555AA152RUS",
-    "BodyType": "седан",
+    "GosNumber": "A555AA 152 RUS",
+    "BodyType": "Седан",
     "Owner": "Александр",
     "ManufWarranty": "5 лет"
   },
   "Engine": {
     "Capacity": "1.6",
     "ManufCountry": "Южная Корея",
-    "FuelCombustionTypeId": 0,
-    "DesignTypeId": 0,
-    "CylinderArrangementId": 0,
-    "CylindersNumberId": 1,
-    "FuelTypeId": 0,
-    "TactId": 1,
-    "CombustibleMixtureFormationId": 0,
-    "CoolingSystemId": 2,
-    "GdmDriveDesign": 0,
-    "Location": 1,
-    "AirPressure": 0
+    "FuelCombustionType": { "id": 0 },
+    "DesignType": { "id": 0 },
+    "CylinderArrangement": { "id": 0 },
+    "CylindersNumber": { "id": 1 },
+    "FuelType": { "id": 0 },
+    "Tact": { "id": 1 },
+    "CombustibleMixtureFormation": { "id": 0 },
+    "CoolingSystem": { "id": 2 },
+    "GdmDriveDesign": { "id": 0 },
+    "Location": { "id": 1 },
+    "AirPressure": { "id": 0 }
   },
   "Body": {
     "Color": "серый"

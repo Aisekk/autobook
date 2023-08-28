@@ -14,6 +14,7 @@ from PySide6.QtGui import QAction, QIcon
 import ui.struct_ui
 import data_store.data_store as storage
 import data_store.enums
+import data_store.const_info
 
 
 class MainWindow(QMainWindow):
@@ -30,7 +31,6 @@ class MainWindow(QMainWindow):
         self.__ui.centralWidget.setLayout(hbxMainLayout)
         self.setCentralWidget(self.__ui.centralWidget)
 
-        # self.__stackedWidget.setCurrentWidget(self.__ui.emptyWidget)
         self.__ui.stackedWidget.setCurrentWidget(self.__ui.emptyWidget)
 
         self.__connectObjects()
@@ -58,11 +58,14 @@ class MainWindow(QMainWindow):
 
     @Slot(data_store.enums.ClassifierItemRole)
     def setRightWidget(self, itemId):
-        if itemId == data_store.enums.MainComponent.Engine:
-            self.__ui.stackedWidget.setCurrentIndex(data_store.enums.WidgetIndex.Engine)
-        else:
+        curIndex = data_store.const_info.widget_indexes.get(itemId)
+        if self.__ui.stackedWidget.widget(curIndex) == None:
             self.__ui.stackedWidget.setCurrentIndex(data_store.enums.WidgetIndex.Empty)
+        else:
+            self.__ui.stackedWidget.setCurrentIndex(curIndex)
 
     def __loadData(self):
         if storage.AutobookDataStore().loadData():
+            self.__ui.controlWidget.loadData()
             self.__ui.engineWidget.loadData()
+            

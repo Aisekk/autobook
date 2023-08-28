@@ -2,7 +2,7 @@ from PySide6.QtCore import qDebug
 from PySide6.QtCore import QCoreApplication, QDir
 
 from data_store.params import Params
-from data_store.values import Values
+from data_store.values import Values, BasicValues
 import data_store.enums as enums
 import data_store.const_info as const_info
 from items.classifier_item import ClassifierItem
@@ -17,13 +17,12 @@ class AutobookDataStore(object):
         return cls.instance
 
     def __initialize(cls):
-        cls.__values = Values("Huyndai", "Solaris")
         cls.__context = "AutobookDataStore"
         cls.__mainPath = QDir.currentPath()
         cls.__loader = loaders.json_loader.JsonLoader(cls.__mainPath)
-        
+
     def loadData(self) -> bool:
-        if self.__loader.loadParams():
+        if self.__loader.loadParams() and self.__loader.loadValues():
             return True
         return False
 
@@ -31,13 +30,10 @@ class AutobookDataStore(object):
         return self.__loader.getParams()
 
     def getValues(self) -> Values:
-        return self.__values
+        return self.__loader.getValues()
 
-    def getDefaultValues(self) -> Values:
-        # return structs.Values(
-        #   "Huyndai", "Solaris", "1.6L", "2012", "A123BC 152 RUS", "Sedan", "Ivanov A.S."
-        # )
-        return Values(
+    def getDefaultValues(self) -> BasicValues:
+        return BasicValues(
             str(QCoreApplication.translate(self.__context, "Brand")),
             str(QCoreApplication.translate(self.__context, "Model")),
             str(QCoreApplication.translate(self.__context, "Engine capacity, L")),

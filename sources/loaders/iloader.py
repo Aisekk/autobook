@@ -1,13 +1,15 @@
+#from __future__ import annotations
 from data_store.values import Values
 from data_store.params import Params
 from PySide6.QtCore import qDebug
 
-class ILoader(object):
+class ILoader:
     def __init__(self) -> None:
         "ILoader"
         self._params = Params()
         self._values = Values()
     
+    #@const_method
     def getParams(self) -> Params:
         "Return car params"
         return self._params
@@ -18,6 +20,8 @@ class ILoader(object):
     
     def loadValues(self) -> bool:
         "Load car values from data source"
+        if self.loadEngineValues():
+            return True
         return False
     
     def loadParams(self) -> bool:
@@ -28,4 +32,8 @@ class ILoader(object):
 
     def loadEngineParams(self) -> bool:
         "Load engine parameters"
+        return False
+
+    def loadEngineValues(self) -> bool:
+        "Load engine values"
         return False

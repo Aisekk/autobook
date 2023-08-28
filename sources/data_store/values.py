@@ -1,5 +1,11 @@
 
-class Values(object):
+class Values:
+    def __init__(self):
+        self.basicValues = BasicValues()
+        self.engineValues = EngineValues()
+
+
+class BasicValues:
     def __init__(
         self,
         brand=str(),
@@ -9,6 +15,7 @@ class Values(object):
         gosNum=str(),
         bodyType=str(),
         ownerDriver=str(),
+        manufWarranty=str(),
     ):
         self.brand = brand
         self.model = model
@@ -17,10 +24,11 @@ class Values(object):
         self.gosNumber = gosNum
         self.bodyType = bodyType
         self.ownerDriver = ownerDriver
+        self.manufWarranty = manufWarranty
 
 
-class Engine(object):
-    def __init__(self, capacity=str(), manufCountry = str()):
+class EngineValues:
+    def __init__(self, capacity=str(), manufCountry=str()):
         self.capacity = capacity
         self.manufCountry = manufCountry
         self.fuelCombustionTypeId = int(-1)
