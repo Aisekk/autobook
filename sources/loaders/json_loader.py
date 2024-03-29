@@ -11,7 +11,7 @@ from PySide6.QtCore import (
     qDebug,
 )
 
-from sources.data_store.values import BasicValues
+from data_store.values import BasicValues
 
 
 class JsonLoader(ILoader):

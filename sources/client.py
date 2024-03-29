@@ -1,29 +1,29 @@
-from ctypes import *
+# from ctypes import *
 
-lib = cdll.LoadLibrary("./3dparty/backend.dll")
-lib.Add.argtypes = [c_longlong, c_longlong]
-print("backend.Add(12,99) = %d" % lib.Add(12, 99))
+# lib = cdll.LoadLibrary("./3dparty/backend.dll")
+# lib.Add.argtypes = [c_longlong, c_longlong]
+# print("backend.Add(12,99) = %d" % lib.Add(12, 99))
 
-lib.Cosine.argtypes = [c_double]
-lib.Cosine.restype = c_double
-cos = lib.Cosine(1)
-print("backend.Cosine(1) = %f" % cos)
-
-
-class GoSlice(Structure):
-    _fields_ = [("data", POINTER(c_void_p)), ("len", c_longlong), ("cap", c_longlong)]
+# lib.Cosine.argtypes = [c_double]
+# lib.Cosine.restype = c_double
+# cos = lib.Cosine(1)
+# print("backend.Cosine(1) = %f" % cos)
 
 
-nums = GoSlice((c_void_p * 5)(74, 4, 122, 9, 12), 5, 5)
-lib.Sort.argtypes = [GoSlice]
-lib.Sort.restype = None
-lib.Sort(nums)
+# class GoSlice(Structure):
+#     _fields_ = [("data", POINTER(c_void_p)), ("len", c_longlong), ("cap", c_longlong)]
 
 
-class GoString(Structure):
-    _fields_ = [("p", c_char_p), ("n", c_longlong)]
+# nums = GoSlice((c_void_p * 5)(74, 4, 122, 9, 12), 5, 5)
+# lib.Sort.argtypes = [GoSlice]
+# lib.Sort.restype = None
+# lib.Sort(nums)
 
 
-lib.Log.argtypes = [GoString]
-msg = GoString(b"Hello Python!", 13)
-lib.Log(msg)
+# class GoString(Structure):
+#     _fields_ = [("p", c_char_p), ("n", c_longlong)]
+
+
+# lib.Log.argtypes = [GoString]
+# msg = GoString(b"Hello Python!", 13)
+# lib.Log(msg)

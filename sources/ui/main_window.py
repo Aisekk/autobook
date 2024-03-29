@@ -1,5 +1,5 @@
 from ast import Add
-from client import lib
+# from client import lib
 
 from PySide6.QtCore import Slot, qDebug
 from PySide6.QtWidgets import (

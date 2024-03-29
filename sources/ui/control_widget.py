@@ -19,7 +19,7 @@ import data_store.enums as enums
 import models.classifier_model as classifier_model
 import items.classifier_item as classifier_item
 import data_store.const_info as const_info
-from sources.data_store.values import BasicValues
+from data_store.values import BasicValues
 
 
 class ControlWidget(QWidget):
