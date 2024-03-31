@@ -1,4 +1,4 @@
-from typing_extensions import override
+#from typing_extensions import override
 from PySide6.QtCore import QAbstractItemModel, QModelIndex, Qt, qDebug
 from items.classifier_item import ClassifierItem
 from data_store.enums import ClassifierItemRole
@@ -40,7 +40,7 @@ class ClassifierModel(QAbstractItemModel):
         self.endRemoveRows()
         return result
 
-    @override
+    #@override
     def data(self, index: QModelIndex, role: int = Qt.ItemDataRole.DisplayRole):
         result = None
         if not index.isValid():
@@ -56,11 +56,11 @@ class ClassifierModel(QAbstractItemModel):
                 result = item.id
         return result
 
-    @override
+    #@override
     def flags(self, index: QModelIndex) -> Qt.ItemFlag:
         return Qt.ItemFlag.ItemIsSelectable | Qt.ItemFlag.ItemIsEnabled
 
-    @override
+    #@override
     def index(self, row: int, column: int, parent=QModelIndex()) -> QModelIndex:
         if not self.hasIndex(row, column, parent):
             return QModelIndex()
@@ -73,7 +73,7 @@ class ClassifierModel(QAbstractItemModel):
             return self.createIndex(row, column, childItem)
         return QModelIndex()
 
-    @override
+    #@override
     def parent(self, index: QModelIndex) -> QModelIndex:
         if not index.isValid():
             return QModelIndex()
@@ -86,7 +86,7 @@ class ClassifierModel(QAbstractItemModel):
             return QModelIndex()
         return self.createIndex(parentOfParent.childIndex(parentItem), 0, parentItem)
 
-    @override
+    #@override
     def rowCount(self, parent=QModelIndex()) -> int:
         parentItem = ClassifierItem()
         if parent.column() > 0:
@@ -97,6 +97,6 @@ class ClassifierModel(QAbstractItemModel):
             parentItem = parent.internalPointer()
         return parentItem.childCount()
 
-    @override
+    #@override
     def columnCount(self, parent=QModelIndex()) -> int:
         return 1

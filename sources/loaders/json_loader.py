@@ -1,4 +1,4 @@
-from typing_extensions import override
+#from typing_extensions import override
 from loaders.iloader import ILoader
 from data_store.params import EngineParams
 
@@ -20,7 +20,7 @@ class JsonLoader(ILoader):
         self.__mainPath = path
         self.__engineParams = EngineParams()
 
-    @override
+    #@override
     def loadEngineParams(self) -> bool:
         filePath = self.__mainPath + "/resources/configs/engine.json"
         qDebug(filePath)
@@ -88,7 +88,7 @@ class JsonLoader(ILoader):
         for key, val in params.items():
             qDebug(str(key) + ": " + val)
 
-    @override
+    #@override
     def loadEngineValues(self) -> bool:
         filePath = self.__mainPath + "/resources/car.json"
         qDebug(filePath)
